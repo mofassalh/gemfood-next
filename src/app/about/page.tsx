@@ -34,7 +34,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       <Navbar selectedLocation={null} onLocationClick={() => {}} />
 
-      <section className="pt-32 pb-16 px-4 sm:px-6" style={{background: 'linear-gradient(135deg, #F26A1B 0%, #F5C800cc 100%)'}}>
+      <section className="pt-32 pb-16 px-4 sm:px-6" style={{background: 'linear-gradient(135deg, #F26A1B 0%, #F26A1Bcc 100%)'}}>
         <div className="max-w-3xl mx-auto text-center">
           <img src="/logo.jpg" alt={restaurantName} className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover mx-auto mb-6 shadow-lg" />
           <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-4" style={{fontFamily: 'var(--font-display)'}}>
