@@ -1,0 +1,484 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { useCartStore } from '@/store/cartStore'
+import Navbar from '@/components/Navbar'
+import { createClient } from '@/lib/supabase'
+import { RESTAURANT_ID } from '@/lib/restaurant'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import StripePaymentForm from '@/components/StripePaymentForm'
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+
+export default function CheckoutPage() {
+  const [mounted, setMounted] = useState(false)
+  const [authChecked, setAuthChecked] = useState(false)
+  const [orderType, setOrderType] = useState<'pickup' | 'delivery'>('pickup')
+  const [deliveryEnabled, setDeliveryEnabled] = useState(false)
+  const [deliveryFee, setDeliveryFee] = useState(5.00)
+  const [step, setStep] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [couponCode, setCouponCode] = useState('')
+  const [coupon, setCoupon] = useState<any>(null)
+  const [couponError, setCouponError] = useState('')
+  const [applyingCoupon, setApplyingCoupon] = useState(false)
+  const [suggestedCoupon, setSuggestedCoupon] = useState<any>(null)
+  const [form, setForm] = useState({
+    name: '', phone: '', email: '',
+    address: '', suburb: '', postcode: '', notes: '',
+  })
+  const router = useRouter()
+  const { items, getSubtotal, getGST, getTotal, clearCart } = useCartStore()
+
+  useEffect(() => {
+    setMounted(true)
+    const savedType = localStorage.getItem('orderType')
+    if (savedType) setOrderType(savedType as 'pickup' | 'delivery')
+    const supabaseClient = createClient()
+    supabaseClient.from('settings').select('value').eq('key', 'delivery_enabled').eq('restaurant_id', RESTAURANT_ID).single().then(({ data }) => {
+      const enabled = data?.value === 'true'
+      setDeliveryEnabled(enabled)
+      if (!enabled && savedType === 'delivery') setOrderType('pickup')
+    })
+    supabaseClient.from('settings').select('value').eq('key', 'delivery_fee').eq('restaurant_id', RESTAURANT_ID).single().then(({ data }) => {
+      if (data?.value) setDeliveryFee(parseFloat(data.value))
+    })
+
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data }) => {
+      if (!data.user) {
+        router.push('/login?redirect=/checkout')
+      } else {
+        const meta = data.user.user_metadata
+        setForm(f => ({
+          ...f,
+          name: meta?.full_name || '',
+          email: data.user?.email || '',
+          phone: meta?.phone || '',
+        }))
+        setAuthChecked(true)
+        ;(async () => {
+          const { count: orderCount } = await supabase.from('orders').select('*', { count: 'exact', head: true }).eq('customer_id', data.user!.id).eq('restaurant_id', RESTAURANT_ID)
+          if (orderCount && orderCount > 0) return
+          const { data: candidates } = await supabase.from('promotions').select('*').eq('is_active', true).eq('max_uses_per_customer', 1).eq('restaurant_id', RESTAURANT_ID)
+          if (!candidates || candidates.length === 0) return
+          const valid = candidates.find((c: any) => {
+            if (c.expires_at && new Date(c.expires_at) < new Date()) return false
+            if (c.max_uses && c.used_count >= c.max_uses) return false
+            return true
+          })
+          if (valid) setSuggestedCoupon(valid)
+        })()
+      }
+    })
+  }, [])
+
+  if (!mounted || !authChecked) return null
+
+  if (items.length === 0) {
+    return (
+      <main className="min-h-screen bg-gray-50">
+        <Navbar selectedLocation={null} onLocationClick={() => {}} />
+        <div className="pt-16 flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="text-6xl mb-4">🛒</div>
+            <h3 className="text-xl font-semibold text-gray-700 mb-4">Your cart is empty</h3>
+            <Link href="/menu" className="px-8 py-3 rounded-full text-white font-semibold" style={{background: 'var(--color-primary)'}}>
+              Browse Menu
+            </Link>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  const applyCoupon = async (codeOverride?: string) => {
+    const codeToApply = codeOverride || couponCode
+    if (!codeToApply) return
+    setApplyingCoupon(true)
+    setCouponError('')
+    setCoupon(null)
+    const supabase = createClient()
+    const { data } = await supabase
+      .from('promotions')
+      .select('*')
+      .eq('code', codeToApply.toUpperCase())
+      .eq('is_active', true)
+      .eq('restaurant_id', RESTAURANT_ID)
+      .single()
+    if (!data) {
+      setCouponError('Invalid or expired coupon code')
+    } else if (data.expires_at && new Date(data.expires_at) < new Date()) {
+      setCouponError('This coupon has expired')
+    } else if (data.max_uses && data.used_count >= data.max_uses) {
+      setCouponError('This coupon has reached its usage limit')
+    } else if (data.max_uses_per_customer) {
+      if (!form.phone) {
+        setCouponError('Please enter your phone number above first')
+        setApplyingCoupon(false)
+        return
+      }
+      const { data: { user } } = await supabase.auth.getUser()
+      let usedCount = 0
+      if (user) {
+        const { count } = await supabase.from('orders').select('*', { count: 'exact', head: true }).eq('customer_id', user.id).eq('coupon_code', codeToApply.toUpperCase()).eq('restaurant_id', RESTAURANT_ID)
+        usedCount = count || 0
+      }
+      const { count: phoneCount } = await supabase.from('orders').select('*', { count: 'exact', head: true }).eq('customer_phone', form.phone).eq('coupon_code', codeToApply.toUpperCase()).eq('restaurant_id', RESTAURANT_ID)
+      usedCount = Math.max(usedCount, phoneCount || 0)
+      if (usedCount >= data.max_uses_per_customer) {
+        setCouponError('This coupon has already been used')
+        setApplyingCoupon(false)
+        return
+      }
+      if (data.min_order && getTotal() < data.min_order) {
+        setCouponError(`Minimum order $${data.min_order} required`)
+        setApplyingCoupon(false)
+        return
+      }
+      setCoupon(data)
+    } else if (data.min_order && getTotal() < data.min_order) {
+      setCouponError(`Minimum order $${data.min_order} required`)
+    } else {
+      setCoupon(data)
+    }
+    setApplyingCoupon(false)
+  }
+
+  const deliveryFeeVal = orderType === 'delivery' ? deliveryFee : 0
+  const getDiscount = () => {
+    if (!coupon) return 0
+    if (coupon.type === 'percent') return (getTotal() * coupon.value) / 100
+    return Math.min(coupon.value, getTotal())
+  }
+  const finalTotal = Math.max(0, getTotal() + deliveryFeeVal - getDiscount())
+
+  const handleOrderPlace = async () => {
+    setLoading(true)
+    const supabase = createClient()
+    const locationName = localStorage.getItem('selectedLocationName') || ''
+    const orderNumber = `#${Math.floor(10000 + Math.random() * 90000)}`
+    const orderItems = items.map(item => ({
+      id: item.productId,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      selectedOptions: item.selectedOptions,
+      optionsPrice: item.optionsPrice,
+      lineTotal: item.lineTotal,
+    }))
+    const { data: userData } = await supabase.auth.getUser()
+    const { data: orderData, error } = await supabase.from('orders').insert({
+      order_number: orderNumber,
+      customer_name: form.name,
+      customer_phone: form.phone,
+      customer_email: form.email,
+      customer_address: orderType === 'delivery' ? `${form.address}, ${form.suburb} ${form.postcode}` : '',
+      order_type: orderType,
+      location: locationName,
+      items: orderItems,
+      total: finalTotal,
+      coupon_code: coupon?.code || null,
+      status: 'pending',
+      notes: form.notes,
+      user_id: userData.user?.id || null,
+      restaurant_id: RESTAURANT_ID,
+      payment_status: 'paid',
+    }).select().single()
+
+    if (error) {
+      alert('Something went wrong. Please try again.')
+      setLoading(false)
+      return
+    }
+    if (coupon) {
+      await supabase.from('promotions').update({ used_count: (coupon.used_count || 0) + 1 }).eq('id', coupon.id)
+    }
+    // Send confirmation email
+    try {
+      const supabaseClient = createClient()
+      await supabaseClient.functions.invoke('order-confirmation', {
+        body: { order: { ...orderData, customer_email: form.email } },
+      })
+    } catch (e) { console.log('Email error (non-blocking):', e) }
+
+    clearCart()
+    router.push(`/order-confirmed?order=${orderNumber}&id=${orderData?.id || ''}`)
+  }
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      <Navbar selectedLocation={null} onLocationClick={() => {}} />
+      <div className="pt-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2" style={{fontFamily: 'var(--font-display)'}}>Checkout</h1>
+
+        <div className="flex items-center gap-3 mb-8">
+          {[1, 2, 3].map(s => (
+            <div key={s} className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-all"
+                style={{ background: step >= s ? 'var(--color-primary)' : '#E5E7EB', color: step >= s ? 'white' : '#9CA3AF' }}>
+                {s}
+              </div>
+              <span className={`text-sm font-medium ${step >= s ? 'text-gray-900' : 'text-gray-400'}`}>
+                {s === 1 ? 'Order Details' : s === 2 ? 'Review' : 'Payment'}
+              </span>
+              {s < 3 && <div className="w-8 h-px bg-gray-200 ml-1" />}
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-4">
+            {step === 1 && (
+              <>
+                <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                  <h3 className="font-semibold text-gray-900 mb-4">How would you like your order?</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button onClick={() => setOrderType('pickup')}
+                      className={`p-4 rounded-xl border-2 text-left transition-all ${orderType === 'pickup' ? 'border-orange-400 bg-orange-50' : 'border-gray-100 hover:border-gray-200'}`}>
+                      <div className="text-2xl mb-2">🏃</div>
+                      <div className="font-semibold text-gray-900">Pickup</div>
+                      <div className="text-xs text-gray-500 mt-0.5">Ready in 15-20 min</div>
+                      <div className="text-xs font-semibold mt-1" style={{color: 'var(--color-primary)'}}>Free</div>
+                    </button>
+                    <button onClick={() => deliveryEnabled && setOrderType('delivery')}
+                      disabled={!deliveryEnabled}
+                      className={`p-4 rounded-xl border-2 text-left transition-all ${!deliveryEnabled ? 'opacity-50 cursor-not-allowed' : ''} ${orderType === 'delivery' ? 'border-orange-400 bg-orange-50' : 'border-gray-100 hover:border-gray-200'}`}>
+                      <div className="text-2xl mb-2">🛵</div>
+                      <div className="font-semibold text-gray-900">Delivery</div>
+                      <div className="text-xs text-gray-500 mt-0.5">30-45 min est.</div>
+                      <div className="text-xs font-semibold mt-1" style={{color: 'var(--color-primary)'}}>$5.00</div>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                  <h3 className="font-semibold text-gray-900 mb-4">Contact Information</h3>
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-xs font-medium text-gray-500 mb-1 block">Full Name *</label>
+                        <input type="text" value={form.name} onChange={e => setForm({...form, name: e.target.value})}
+                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
+                          placeholder="John Smith" />
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-gray-500 mb-1 block">Phone *</label>
+                        <input type="tel" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})}
+                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
+                          placeholder="04XX XXX XXX" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-gray-500 mb-1 block">Email *</label>
+                      <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})}
+                        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
+                        placeholder="john@example.com" />
+                    </div>
+                  </div>
+                </div>
+
+                {orderType === 'delivery' && (
+                  <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                    <h3 className="font-semibold text-gray-900 mb-4">Delivery Address</h3>
+                    <div className="space-y-3">
+                      <div>
+                        <label className="text-xs font-medium text-gray-500 mb-1 block">Street Address *</label>
+                        <input type="text" value={form.address} onChange={e => setForm({...form, address: e.target.value})}
+                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
+                          placeholder="123 Main Street" />
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-xs font-medium text-gray-500 mb-1 block">Suburb *</label>
+                          <input type="text" value={form.suburb} onChange={e => setForm({...form, suburb: e.target.value})}
+                            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
+                            placeholder="St Albans" />
+                        </div>
+                        <div>
+                          <label className="text-xs font-medium text-gray-500 mb-1 block">Postcode *</label>
+                          <input type="text" value={form.postcode} onChange={e => setForm({...form, postcode: e.target.value})}
+                            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
+                            placeholder="3021" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                  <h3 className="font-semibold text-gray-900 mb-3">Special Instructions</h3>
+                  <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}
+                    className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 resize-none"
+                    rows={3} placeholder="Any special requests or allergies?" />
+                </div>
+
+                <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                  {suggestedCoupon && !coupon && (
+                    <div className="flex items-center justify-between gap-3 p-3 rounded-xl mb-4" style={{ background: '#FFF9E0', border: '1px solid #F5C800' }}>
+                      <div>
+                        <div className="font-semibold text-sm text-gray-900">🎉 First order? Get {suggestedCoupon.type === 'percent' ? `${suggestedCoupon.value}%` : `$${suggestedCoupon.value}`} off!</div>
+                        <div className="text-xs text-gray-600 mt-0.5">Code: {suggestedCoupon.code}</div>
+                      </div>
+                      <button onClick={() => { setCouponCode(suggestedCoupon.code); applyCoupon(suggestedCoupon.code) }}
+                        disabled={applyingCoupon}
+                        className="text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap disabled:opacity-50"
+                        style={{ background: '#F5C800', color: '#1a1a1a' }}>
+                        {applyingCoupon ? '...' : 'Apply'}
+                      </button>
+                    </div>
+                  )}
+                  <h3 className="font-semibold text-gray-900 mb-3">🏷️ Coupon Code</h3>
+                  {coupon ? (
+                    <div className="flex items-center justify-between p-3 rounded-xl" style={{ background: '#f0fdf4', border: '1px solid #86efac' }}>
+                      <div>
+                        <div className="font-semibold text-sm" style={{ color: '#15803d' }}>{coupon.code} applied!</div>
+                        <div className="text-xs mt-0.5" style={{ color: '#86efac' }}>
+                          {coupon.type === 'percent' ? `${coupon.value}% off` : `$${coupon.value} off`}
+                        </div>
+                      </div>
+                      <button onClick={() => { setCoupon(null); setCouponCode('') }}
+                        className="text-xs px-3 py-1.5 rounded-lg" style={{ border: '1px solid #86efac', color: '#15803d' }}>
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input value={couponCode}
+                        onChange={e => { setCouponCode(e.target.value.toUpperCase()); setCouponError('') }}
+                        placeholder="Enter coupon code"
+                        className="flex-1 px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 uppercase" />
+                      <button onClick={() => applyCoupon()} disabled={applyingCoupon || !couponCode}
+                        className="px-4 py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50"
+                        style={{ background: 'var(--color-primary)', color: '#1a1a1a' }}>
+                        {applyingCoupon ? '...' : 'Apply'}
+                      </button>
+                    </div>
+                  )}
+                  {couponError && <p className="text-xs mt-2" style={{ color: '#dc2626' }}>{couponError}</p>}
+                </div>
+
+                <button onClick={() => setStep(2)} disabled={!form.name || !form.phone || !form.email}
+                  className="w-full py-4 rounded-full text-white font-semibold transition-all hover:shadow-lg disabled:opacity-50"
+                  style={{background: 'var(--color-primary)'}}>
+                  Continue to Review →
+                </button>
+              </>
+            )}
+
+            {step === 2 && (
+              <>
+                <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-semibold text-gray-900">Order Review</h3>
+                    <button onClick={() => setStep(1)} className="text-sm font-medium" style={{color: 'var(--color-primary)'}}>Edit</button>
+                  </div>
+                  <div className="space-y-3 mb-4">
+                    {items.map(item => (
+                      <div key={item.id} className="flex justify-between text-sm">
+                        <div>
+                          <span className="font-medium text-gray-900">{item.name}</span>
+                          <span className="text-gray-400 ml-2">×{item.quantity}</span>
+                        </div>
+                        <span className="font-medium text-gray-900">${item.lineTotal.toFixed(2)}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="border-t border-gray-100 pt-3 space-y-1.5 text-sm">
+                    <div className="flex justify-between text-gray-500"><span>Subtotal</span><span>${getSubtotal().toFixed(2)}</span></div>
+                    <div className="flex justify-between text-gray-500"><span>GST (10%)</span><span>${getGST().toFixed(2)}</span></div>
+                    {orderType === 'delivery' && (
+                      <div className="flex justify-between text-gray-500"><span>Delivery Fee</span><span>${deliveryFeeVal.toFixed(2)}</span></div>
+                    )}
+                    {coupon && (
+                      <div className="flex justify-between text-gray-700 pt-1 border-t border-gray-100">
+                        <span>Total</span><span>${(getTotal() + deliveryFeeVal).toFixed(2)}</span>
+                      </div>
+                    )}
+                    {coupon && (
+                      <div className="flex justify-between" style={{ color: '#15803d' }}>
+                        <span>Discount ({coupon.code})</span><span>-${getDiscount().toFixed(2)}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between font-bold text-gray-900 text-base pt-1 border-t border-gray-100">
+                      <span>{coupon ? 'Final Total' : 'Total'}</span><span>${finalTotal.toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                  <h3 className="font-semibold text-gray-900 mb-3">
+                    {orderType === 'pickup' ? '🏃 Pickup' : '🛵 Delivery'}
+                  </h3>
+                  <div className="text-sm text-gray-600 space-y-1">
+                    <div>{form.name} · {form.phone}</div>
+                    <div>{form.email}</div>
+                    {orderType === 'delivery' && <div>{form.address}, {form.suburb} {form.postcode}</div>}
+                  </div>
+                </div>
+
+                <button onClick={() => setStep(3)}
+                  className="w-full py-4 rounded-full text-white font-semibold transition-all hover:shadow-lg"
+                  style={{background: 'var(--color-primary)'}}>
+                  Continue to Payment →
+                </button>
+              </>
+            )}
+
+            {step === 3 && (
+              <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                <h3 className="font-semibold text-gray-900 mb-5">💳 Payment</h3>
+                <Elements stripe={stripePromise} options={{ mode: 'payment', amount: Math.round(finalTotal * 100), currency: 'aud' }}>
+                  <StripePaymentForm
+                    onSuccess={handleOrderPlace}
+                    loading={loading}
+                    setLoading={setLoading}
+                    finalTotal={finalTotal}
+                  />
+                </Elements>
+              </div>
+            )}
+          </div>
+
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl border border-gray-100 p-5 sticky top-24">
+              <h3 className="font-semibold text-gray-900 mb-4">Your Order ({items.length} {items.length === 1 ? 'item' : 'items'})</h3>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {items.map(item => (
+                  <div key={item.id} className="flex justify-between text-sm">
+                    <span className="text-gray-600">{item.name} ×{item.quantity}</span>
+                    <span className="font-medium">${item.lineTotal.toFixed(2)}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-gray-100 mt-3 pt-3 space-y-1.5">
+                <div className="flex justify-between text-sm text-gray-500"><span>Subtotal</span><span>${getSubtotal().toFixed(2)}</span></div>
+                <div className="flex justify-between text-sm text-gray-500"><span>GST (10%)</span><span>${getGST().toFixed(2)}</span></div>
+                {orderType === 'delivery' && (
+                  <div className="flex justify-between text-sm text-gray-500"><span>Delivery Fee</span><span>${deliveryFeeVal.toFixed(2)}</span></div>
+                )}
+                {coupon && (
+                  <div className="flex justify-between text-sm text-gray-700 pt-1 border-t border-gray-100">
+                    <span>Total</span><span>${(getTotal() + deliveryFeeVal).toFixed(2)}</span>
+                  </div>
+                )}
+                {coupon && (
+                  <div className="flex justify-between text-xs" style={{ color: '#15803d' }}>
+                    <span>{coupon.code}</span><span>-${getDiscount().toFixed(2)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between font-bold pt-1 border-t border-gray-100">
+                  <span>{coupon ? 'Final Total' : 'Total'}</span>
+                  <span style={{color: 'var(--color-primary)'}}>${finalTotal.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}
