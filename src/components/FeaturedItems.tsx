@@ -85,6 +85,9 @@ export default function FeaturedItems({ onOrderClick }: FeaturedItemsProps) {
     }
   }
 
+  // Hide the whole section until at least one item is marked popular
+  if (items.length === 0) return null
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
