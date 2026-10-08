@@ -13,7 +13,7 @@ interface NavbarProps {
   onLocationClick: () => void
 }
 
-// The location props are kept so existing pages still compile; the dropdown was removed (single location)
+// The location props are kept so existing pages still compile; the dropdown was replaced by page links (single location)
 export default function Navbar(_props: NavbarProps) {
   const [settings, setSettings] = useState<any>({})
   const [user, setUser] = useState<any>(null)
@@ -64,6 +64,11 @@ export default function Navbar(_props: NavbarProps) {
             }
             <span className="font-bold text-sm sm:text-lg whitespace-nowrap truncate max-w-[140px] sm:max-w-none" style={{fontFamily: 'var(--font-sans)'}}>{restaurantName}</span>
           </Link>
+          <div className="hidden sm:flex items-center gap-8 text-sm font-semibold text-gray-700">
+            <Link href="/menu" className="hover:text-orange-600 transition-colors">Menu</Link>
+            <Link href="/about" className="hover:text-orange-600 transition-colors">About</Link>
+            <Link href="/faq" className="hover:text-orange-600 transition-colors">FAQ</Link>
+          </div>
           <div className="flex items-center gap-3">
             <Link href="/cart" className="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
               <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
