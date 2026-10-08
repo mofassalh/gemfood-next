@@ -1,12 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Bricolage_Grotesque } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 import { createClient } from '@/lib/supabase'
 import { RESTAURANT_ID } from '@/lib/restaurant'
 
 // Hero headline font (only used here; other headings keep the site display font)
-const heroFont = Bricolage_Grotesque({ subsets: ['latin'], weight: ['800'], display: 'swap' })
+const heroFont = Open_Sans({ subsets: ['latin'], weight: ['800'], display: 'swap' })
 
 interface HeroProps {
   onOrderClick: () => void
@@ -102,7 +102,7 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
             </div>
           )}
 
-          <h1 className={`${heroFont.className} text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight mb-6 text-white`}>
+          <h1 className={`${heroFont.className} text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.1] tracking-tight mb-6 text-white`}>
             {heroTitle1}{' '}
             <span className="sm:whitespace-nowrap" style={{ color: primaryColor }}>{heroTitle2}</span>
             <br />
