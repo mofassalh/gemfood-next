@@ -61,7 +61,7 @@ export default function CheckoutPage() {
         }))
         setAuthChecked(true)
         ;(async () => {
-          const { count: orderCount } = await supabase.from('orders').select('*', { count: 'exact', head: true }).eq('customer_id', data.user!.id).eq('restaurant_id', RESTAURANT_ID)
+          const { count: orderCount } = await supabase.from('orders').select('*', { count: 'exact', head: true }).eq('user_id', data.user!.id).eq('restaurant_id', RESTAURANT_ID)
           if (orderCount && orderCount > 0) return
           const { data: candidates } = await supabase.from('promotions').select('*').eq('is_active', true).eq('max_uses_per_customer', 1).eq('restaurant_id', RESTAURANT_ID)
           if (!candidates || candidates.length === 0) return
@@ -121,14 +121,9 @@ export default function CheckoutPage() {
         setApplyingCoupon(false)
         return
       }
-      const { data: { user } } = await supabase.auth.getUser()
-      let usedCount = 0
-      if (user) {
-        const { count } = await supabase.from('orders').select('*', { count: 'exact', head: true }).eq('customer_id', user.id).eq('coupon_code', codeToApply.toUpperCase()).eq('restaurant_id', RESTAURANT_ID)
-        usedCount = count || 0
-      }
-      const { count: phoneCount } = await supabase.from('orders').select('*', { count: 'exact', head: true }).eq('customer_phone', form.phone).eq('coupon_code', codeToApply.toUpperCase()).eq('restaurant_id', RESTAURANT_ID)
-      usedCount = Math.max(usedCount, phoneCount || 0)
+      // Counted inside the database, so customers never read other people's orders
+      const { data: usedData } = await supabase.rpc('coupon_use_count', { p_code: codeToApply.toUpperCase(), p_phone: form.phone })
+      const usedCount = usedData || 0
       if (usedCount >= data.max_uses_per_customer) {
         setCouponError('This coupon has already been used')
         setApplyingCoupon(false)
@@ -171,7 +166,11 @@ export default function CheckoutPage() {
       lineTotal: item.lineTotal,
     }))
     const { data: userData } = await supabase.auth.getUser()
-    const { data: orderData, error } = await supabase.from('orders').insert({
+    // The id is created here so the order does not have to be read back after saving
+    // (guests are not allowed to read orders).
+    const orderId = crypto.randomUUID()
+    const orderData = {
+      id: orderId,
       order_number: orderNumber,
       customer_name: form.name,
       customer_phone: form.phone,
@@ -187,7 +186,8 @@ export default function CheckoutPage() {
       user_id: userData.user?.id || null,
       restaurant_id: RESTAURANT_ID,
       payment_status: 'paid',
-    }).select().single()
+    }
+    const { error } = await supabase.from('orders').insert(orderData)
 
     if (error) {
       alert('Something went wrong. Please try again.')
@@ -195,7 +195,7 @@ export default function CheckoutPage() {
       return
     }
     if (coupon) {
-      await supabase.from('promotions').update({ used_count: (coupon.used_count || 0) + 1 }).eq('id', coupon.id)
+      await supabase.rpc('use_promotion', { p_id: coupon.id })
     }
     // Send confirmation email
     try {
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
     } catch (e) { console.log('Email error (non-blocking):', e) }
 
     clearCart()
-    router.push(`/order-confirmed?order=${orderNumber}&id=${orderData?.id || ''}`)
+    router.push(`/order-confirmed?order=${orderNumber}&id=${orderId}`)
   }
 
   return (
