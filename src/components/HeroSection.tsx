@@ -83,7 +83,7 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
   )
 
   return (
-    <section className="pt-16 relative overflow-hidden" style={{ background: '#1A1A1A' }}>
+    <section className="pt-16 relative overflow-hidden flex items-center min-h-[min(100svh,860px)]" style={{ background: '#1A1A1A' }}>
 
       {/* Food photo: full background on phones, right side on desktop */}
       <div className="absolute inset-0 lg:left-[40%]">
