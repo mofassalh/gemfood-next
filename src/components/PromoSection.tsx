@@ -43,7 +43,7 @@ export default function PromoSection({ onOrderClick }: PromoProps) {
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" style={{background: 'white', transform: 'translate(30%, -30%)'}}></div>
           <div className="absolute bottom-0 left-20 w-40 h-40 rounded-full opacity-10" style={{background: 'white', transform: 'translateY(30%)'}}></div>
           <div className="relative z-10 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-black bg-opacity-10 px-3 py-1.5 rounded-full text-black text-xs font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 bg-black/10 px-3 py-1.5 rounded-full text-black text-xs font-semibold mb-4">
               🎉 Limited Time Offer
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3" style={{fontFamily: 'var(--font-display)'}}>
