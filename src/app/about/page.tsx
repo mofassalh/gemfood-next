@@ -47,7 +47,7 @@ export default function AboutPage() {
       </section>
 
       <section className="py-16 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="max-w-3xl mx-auto">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4" style={{fontFamily: 'var(--font-display)'}}>Our Story</h2>
             {loading ? (
@@ -61,9 +61,6 @@ export default function AboutPage() {
             ) : (
               <p className="text-gray-400">Content coming soon.</p>
             )}
-          </div>
-          <div className="rounded-2xl overflow-hidden shadow-lg">
-            <img src="/about-staff-kitchen.jpg" alt="Our team preparing fresh food" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -107,15 +104,6 @@ export default function AboutPage() {
               <h3 className="font-bold text-gray-900 mb-1">Locally Sourced</h3>
               <p className="text-sm text-gray-500">Supporting our St. Petersburg community, one order at a time.</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 sm:px-6" style={{background: '#FFF7F2'}}>
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8" style={{fontFamily: 'var(--font-display)'}}>Loved by Our Community</h2>
-          <div className="rounded-2xl overflow-hidden shadow-lg max-w-2xl mx-auto">
-            <img src="/about-customers.jpg" alt="Happy customers enjoying Gem Food" className="w-full h-auto object-cover" />
           </div>
         </div>
       </section>
