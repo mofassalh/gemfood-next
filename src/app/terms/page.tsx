@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: "Terms of Service | Angie's Kebabs & Burgers",
-  description: "Terms of Service for Angie's Kebabs & Burgers",
+  title: "Terms of Service | Gem Food",
+  description: "Terms of Service for Gem Food",
 }
 
 export default function TermsPage() {
@@ -18,7 +18,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">1. Acceptance of Terms</h2>
-            <p>By using angiesknb.com, you agree to these Terms of Service. If you do not agree, please do not use our website.</p>
+            <p>By using gemfoodeat.com, you agree to these Terms of Service. If you do not agree, please do not use our website.</p>
           </section>
 
           <section>
@@ -53,7 +53,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">7. Limitation of Liability</h2>
-            <p>To the extent permitted by Australian law, Angie's Kebabs & Burgers is not liable for any indirect, incidental, or consequential damages arising from use of our services.</p>
+            <p>To the extent permitted by Australian law, Gem Food is not liable for any indirect, incidental, or consequential damages arising from use of our services.</p>
           </section>
 
           <section>

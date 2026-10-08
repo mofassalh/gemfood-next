@@ -21,8 +21,8 @@ export default function PromoSection({ onOrderClick }: PromoProps) {
 
   if (settings && settings.promo_enabled === 'false') return null
 
-  const title = settings?.promo_title || 'Free Delivery on Your First Order!'
-  const subtitle = settings?.promo_subtitle || 'Sign up today and enjoy free delivery on your first order. Available at all 3 Melbourne locations.'
+  const title = settings?.promo_title || 'Order Online, Skip the Wait'
+  const subtitle = settings?.promo_subtitle || 'Sign up today and earn rewards on every order.'
   const buttonText = settings?.promo_button_text || 'Order Now & Save'
   const buttonLink = settings?.promo_button_link || null
   const emoji = settings?.promo_emoji || '🎁'
@@ -80,8 +80,8 @@ export default function PromoSection({ onOrderClick }: PromoProps) {
           <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-orange-100">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>📍</div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-1">3 Locations</h3>
-              <p className="text-sm text-gray-500">St Albans, Fitzroy North & Ascot Vale. Always nearby.</p>
+              <h3 className="font-bold text-gray-900 mb-1">Find Us</h3>
+              <p className="text-sm text-gray-500">2800 38th Ave N, St. Petersburg, FL 33713</p>
             </div>
           </div>
         </div>

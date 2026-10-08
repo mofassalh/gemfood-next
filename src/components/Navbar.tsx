@@ -49,7 +49,7 @@ export default function Navbar({ selectedLocation, onLocationClick }: NavbarProp
     return '?'
   }
 
-  const restaurantName = settings.business_name || "Angie's Kebabs & Burgers"
+  const restaurantName = settings.business_name || "Gem Food"
   const logoUrl = settings.logo_url || ''
 
   return (

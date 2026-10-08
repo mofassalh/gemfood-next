@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: "Privacy Policy | Angie's Kebabs & Burgers",
-  description: "Privacy Policy for Angie's Kebabs & Burgers",
+  title: "Privacy Policy | Gem Food",
+  description: "Privacy Policy for Gem Food",
 }
 
 export default function PrivacyPage() {

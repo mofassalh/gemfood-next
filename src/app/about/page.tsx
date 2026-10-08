@@ -8,7 +8,7 @@ import { RESTAURANT_ID } from '@/lib/restaurant'
 
 export default function AboutPage() {
   const [content, setContent] = useState('')
-  const [restaurantName, setRestaurantName] = useState("Angie's Kebabs & Burgers")
+  const [restaurantName, setRestaurantName] = useState("Gem Food")
   const [locationCount, setLocationCount] = useState(0)
   const [menuCount, setMenuCount] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -23,7 +23,7 @@ export default function AboutPage() {
       const map: any = {}
       settingsRes.data?.forEach((r: any) => { map[r.key] = r.value })
       setContent(map.about_us_content || '')
-      setRestaurantName(map.business_name || "Angie\'s Kebabs & Burgers")
+      setRestaurantName(map.business_name || "Gem Food")
       setLocationCount(locRes.count || 0)
       setMenuCount(menuRes.count || 0)
       setLoading(false)
@@ -105,7 +105,7 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>📍</div>
             <div>
               <h3 className="font-bold text-gray-900 mb-1">Locally Sourced</h3>
-              <p className="text-sm text-gray-500">Supporting our Melbourne community, one order at a time.</p>
+              <p className="text-sm text-gray-500">Supporting our St. Petersburg community, one order at a time.</p>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8" style={{fontFamily: 'var(--font-display)'}}>Loved by Our Community</h2>
           <div className="rounded-2xl overflow-hidden shadow-lg max-w-2xl mx-auto">
-            <img src="/about-customers.jpg" alt="Happy customers enjoying Angie's food" className="w-full h-auto object-cover" />
+            <img src="/about-customers.jpg" alt="Happy customers enjoying Gem Food" className="w-full h-auto object-cover" />
           </div>
         </div>
       </section>

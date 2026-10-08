@@ -8,8 +8,8 @@ const GA_ID = 'G-RD2J6J2DMZ'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings()
-  const businessName = settings.business_name || "Angie's Kebabs & Burgers"
-  const description = settings.tagline || 'Order online for pickup or delivery from Angie\'s Kebabs & Burgers. Locations in St Albans, Fitzroy North & Ascot Vale.'
+  const businessName = settings.business_name || "Gem Food"
+  const description = settings.tagline || 'Order 100% halal food online from Gem Food in St. Petersburg, Florida.'
 
   return {
     title: {
@@ -17,14 +17,13 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${businessName}`,
     },
     description,
-    keywords: ['kebab', 'burger', 'online order', 'St Albans', 'Fitzroy North', 'Ascot Vale', 'pickup', 'delivery'],
+    keywords: ['halal', 'halal food', 'online order', 'St. Petersburg', 'Florida', 'takeaway', 'pickup'],
     icons: { icon: '/logo.jpg', apple: '/logo.jpg' },
-    verification: { google: 'iytJAdPRvk667SowWJXVSncOzm_ow4Vz2q__dN3DBMU' },
     openGraph: {
       title: businessName,
       description,
       type: 'website',
-      url: 'https://angiesknb.com',
+      url: 'https://gemfoodeat.com',
       siteName: businessName,
     },
     twitter: {
@@ -46,19 +45,18 @@ export default async function RootLayout({
 }) {
   const settings = await getSettings()
   const primaryColor = settings.primary_color || '#F26A1B'
-  const businessName = settings.business_name || "Angie's Kebabs & Burgers"
+  const businessName = settings.business_name || "Gem Food"
 
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
     name: businessName,
-    url: 'https://angiesknb.com',
-    servesCuisine: ['Kebab', 'Burger'],
-    hasMenu: 'https://angiesknb.com/menu',
+    url: 'https://gemfoodeat.com',
+    telephone: '+1 727-954-0001',
+    servesCuisine: ['Halal'],
+    hasMenu: 'https://gemfoodeat.com/menu',
     location: [
-      { '@type': 'Place', name: 'St Albans', address: { '@type': 'PostalAddress', addressLocality: 'St Albans', addressCountry: 'AU' } },
-      { '@type': 'Place', name: 'Fitzroy North', address: { '@type': 'PostalAddress', addressLocality: 'Fitzroy North', addressCountry: 'AU' } },
-      { '@type': 'Place', name: 'Ascot Vale', address: { '@type': 'PostalAddress', addressLocality: 'Ascot Vale', addressCountry: 'AU' } },
+      { '@type': 'Place', name: 'Gem Food', address: { '@type': 'PostalAddress', streetAddress: '2800 38th Ave N', addressLocality: 'St. Petersburg', addressRegion: 'FL', postalCode: '33713', addressCountry: 'US' } },
     ],
   }
 

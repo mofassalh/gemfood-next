@@ -296,7 +296,7 @@ export default function CheckoutPage() {
                           <label className="text-xs font-medium text-gray-500 mb-1 block">Suburb *</label>
                           <input type="text" value={form.suburb} onChange={e => setForm({...form, suburb: e.target.value})}
                             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
-                            placeholder="St Albans" />
+                            placeholder="St. Petersburg" />
                         </div>
                         <div>
                           <label className="text-xs font-medium text-gray-500 mb-1 block">Postcode *</label>

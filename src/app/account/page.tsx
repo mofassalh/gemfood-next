@@ -435,7 +435,7 @@ export default function AccountPage() {
               {[
                 { key: 'full_name', label: 'Full Name', placeholder: 'Your full name' },
                 { key: 'phone', label: 'Phone', placeholder: '+61 4XX XXX XXX' },
-                { key: 'address', label: 'Default Address', placeholder: '123 Main St, Melbourne' },
+                { key: 'address', label: 'Default Address', placeholder: '123 Main St, St. Petersburg' },
               ].map(({ key, label, placeholder }) => (
                 <div key={key}>
                   <label className="text-xs text-gray-500 mb-1 block">{label}</label>

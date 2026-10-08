@@ -4,18 +4,18 @@
  */
 module.exports = {
   // Restaurant Info
-  name: "Angie's Kebabs & Burgers",
-  tagline: "Fresh & Flavourful Every Time",
-  description: "Handcrafted kebabs and gourmet burgers made with the freshest ingredients.",
+  name: "Gem Food",
+  tagline: "100% Halal Food",
+  description: "100% halal food, made fresh in St. Petersburg, Florida.",
   
   // Brand Colors
   primaryColor: "#F26A1B",
   darkColor: "#1A1A1A",
   
   // Contact
-  phone: "03 9000 0001",
+  phone: "+1 727-954-0001",
   email: "hello@angiesknb.com",
-  website: "https://angiesknb.com",
+  website: "https://gemfoodeat.com",
   
   // Social
   instagram: "https://instagram.com/angiesknb",
@@ -23,9 +23,7 @@ module.exports = {
   
   // Locations
   locations: [
-    { name: "St Albans", address: "123 Main St, St Albans VIC 3021" },
-    { name: "Fitzroy North", address: "456 High St, Fitzroy North VIC 3068" },
-    { name: "Ascot Vale", address: "789 Union Rd, Ascot Vale VIC 3032" },
+    { name: "St. Petersburg", address: "2800 38th Ave N, St. Petersburg, FL 33713" },
   ],
   
   // Features

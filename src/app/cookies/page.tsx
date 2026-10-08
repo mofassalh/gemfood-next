@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: "Cookie Policy | Angie's Kebabs & Burgers",
-  description: "Cookie Policy for Angie's Kebabs & Burgers",
+  title: "Cookie Policy | Gem Food",
+  description: "Cookie Policy for Gem Food",
 }
 
 export default function CookiesPage() {

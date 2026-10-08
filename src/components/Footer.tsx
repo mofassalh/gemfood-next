@@ -21,11 +21,11 @@ export default function Footer() {
     })
   }, [])
 
-  const businessName = settings.business_name || "Angie's"
-  const tagline = settings.tagline || 'Fresh kebabs and gourmet burgers across Melbourne. Made with love, served with pride.'
+  const businessName = settings.business_name || "Gem Food"
+  const tagline = settings.tagline || '100% halal food, made fresh in St. Petersburg, Florida.'
   const facebook = settings.facebook || '#'
   const instagram = settings.instagram || '#'
-  const copyright = settings.copyright || `© ${new Date().getFullYear()} Angie's Kebabs & Burgers. All rights reserved.`
+  const copyright = settings.copyright || `© ${new Date().getFullYear()} Gem Food. All rights reserved.`
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -62,9 +62,7 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Our Locations</h4>
             {locations.length === 0 ? (
               <ul className="space-y-3 text-sm text-gray-400">
-                <li><div className="font-medium text-gray-300">St Albans</div></li>
-                <li><div className="font-medium text-gray-300">Fitzroy North</div></li>
-                <li><div className="font-medium text-gray-300">Ascot Vale</div></li>
+                <li><div className="font-medium text-gray-300">St. Petersburg</div><div>2800 38th Ave N, St. Petersburg, FL 33713</div></li>
               </ul>
             ) : (
               <ul className="space-y-3 text-sm text-gray-400">
