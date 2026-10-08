@@ -89,7 +89,7 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
       <div className="absolute inset-0 hidden lg:block"
         style={{ background: 'linear-gradient(90deg, #1A1A1A 0%, #1A1A1A 40%, rgba(26,26,26,0.6) 58%, rgba(26,26,26,0) 82%)' }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 w-full relative" style={{ zIndex: 1 }}>
         <div className="max-w-xl">
           {badge && (
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
@@ -98,10 +98,10 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
             </div>
           )}
 
-          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6 text-white"
+          <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white"
             style={{ fontFamily: 'var(--font-display)' }}>
             {heroTitle1}{' '}
-            <span style={{ color: primaryColor }}>{heroTitle2}</span>
+            <span className="sm:whitespace-nowrap" style={{ color: primaryColor }}>{heroTitle2}</span>
             <br />
             {heroTitle3}
           </h1>
