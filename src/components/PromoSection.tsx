@@ -26,7 +26,7 @@ export default function PromoSection({ onOrderClick }: PromoProps) {
   const buttonText = settings?.promo_button_text || 'Order Now & Save'
   const buttonLink = settings?.promo_button_link || null
   const emoji = settings?.promo_emoji || '🎁'
-  const bgColor = settings?.primary_color || '#F5C800'
+  const bgColor = settings?.primary_color || '#F26A1B'
 
   const handleClick = () => {
     if (buttonLink) window.location.href = buttonLink
@@ -34,7 +34,7 @@ export default function PromoSection({ onOrderClick }: PromoProps) {
   }
 
   return (
-    <section className="py-20" style={{background: '#FFFDF0'}}>
+    <section className="py-20" style={{background: '#FFF7F2'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className="rounded-3xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden"
@@ -63,22 +63,22 @@ export default function PromoSection({ onOrderClick }: PromoProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-yellow-100">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFF3B0'}}>🚀</div>
+          <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-orange-100">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>🚀</div>
             <div>
               <h3 className="font-bold text-gray-900 mb-1">Fast Pickup</h3>
               <p className="text-sm text-gray-500">Ready in 15-20 minutes. Skip the queue with online ordering.</p>
             </div>
           </div>
-          <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-yellow-100">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFF3B0'}}>🌿</div>
+          <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-orange-100">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>🌿</div>
             <div>
               <h3 className="font-bold text-gray-900 mb-1">Fresh Ingredients</h3>
               <p className="text-sm text-gray-500">Locally sourced produce and premium meats, prepared daily.</p>
             </div>
           </div>
-          <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-yellow-100">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFF3B0'}}>📍</div>
+          <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-orange-100">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>📍</div>
             <div>
               <h3 className="font-bold text-gray-900 mb-1">3 Locations</h3>
               <p className="text-sm text-gray-500">St Albans, Fitzroy North & Ascot Vale. Always nearby.</p>

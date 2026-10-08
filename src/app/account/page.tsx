@@ -207,7 +207,7 @@ export default function AccountPage() {
           {/* Cover */}
           <div className="relative w-full h-32 overflow-hidden" style={{background:'#1a1a1a'}}>
             {heroImage && <img src={heroImage} alt="cover" className="w-full h-full object-cover" style={{opacity:0.55}} />}
-            <div className="absolute inset-0 opacity-15" style={{backgroundImage:'repeating-linear-gradient(45deg,#F5C800 0,#F5C800 1px,transparent 0,transparent 50%)',backgroundSize:'16px 16px'}} />
+            <div className="absolute inset-0 opacity-15" style={{backgroundImage:'repeating-linear-gradient(45deg,#F26A1B 0,#F26A1B 1px,transparent 0,transparent 50%)',backgroundSize:'16px 16px'}} />
             <button onClick={handleLogout}
               className="absolute top-3 right-3 flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full"
               style={{background:'rgba(0,0,0,0.5)', color:'white'}}>
@@ -220,10 +220,10 @@ export default function AccountPage() {
               <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0" style={{border:'3px solid white'}}>
                 {avatarUrl
                   ? <img src={avatarUrl} alt={initials} className="w-full h-full object-cover" />
-                  : <div className="w-full h-full flex items-center justify-center text-xl font-bold" style={{background:'#F5C800', color:'#1a1a1a'}}>{initials}</div>
+                  : <div className="w-full h-full flex items-center justify-center text-xl font-bold" style={{background:'#F26A1B', color:'#1a1a1a'}}>{initials}</div>
                 }
               </div>
-              <div className="text-xs px-3 py-1.5 rounded-full font-semibold" style={{background:'#FFF3B0', color:'#7A5F00', border:'1px solid #E8C84A'}}>
+              <div className="text-xs px-3 py-1.5 rounded-full font-semibold" style={{background:'#FFD9BF', color:'#7A2C05', border:'1px solid #F58B4C'}}>
                 {level.icon} {level.name} Member
               </div>
             </div>
@@ -249,34 +249,34 @@ export default function AccountPage() {
 
         {/* Food Passport */}
         {loyaltySettings?.is_active && (
-          <div className="rounded-3xl p-5 mb-4" style={{background:'#FFFDF5', border:'1.5px solid #E8C84A', opacity: visible ? 1 : 0, transition:'all 0.5s ease 0.3s'}}>
+          <div className="rounded-3xl p-5 mb-4" style={{background:'#FFF9F5', border:'1.5px solid #F58B4C', opacity: visible ? 1 : 0, transition:'all 0.5s ease 0.3s'}}>
             <div className="flex justify-between items-start mb-3">
               <div>
-                <div className="text-xs font-semibold mb-1" style={{color:'#B8960A', letterSpacing:'0.5px'}}>FOOD PASSPORT</div>
-                <div className="text-3xl font-black" style={{color:'#D4A900'}}><CountUp target={loyaltyPoints} /> pts</div>
-                <div className="text-sm" style={{color:'#B8960A'}}>worth ${pointsValue}</div>
+                <div className="text-xs font-semibold mb-1" style={{color:'#B8430A', letterSpacing:'0.5px'}}>FOOD PASSPORT</div>
+                <div className="text-3xl font-black" style={{color:'#D4470C'}}><CountUp target={loyaltyPoints} /> pts</div>
+                <div className="text-sm" style={{color:'#B8430A'}}>worth ${pointsValue}</div>
               </div>
               {level.next && (
                 <div className="text-right">
-                  <div className="text-xs mb-1" style={{color:'#B8960A'}}>next level</div>
-                  <div className="text-sm font-bold" style={{color:'#7A5F00'}}>{level.next === 'Silver' ? '🥈' : level.next === 'Gold' ? '🥇' : '💎'} {level.next}</div>
-                  <div className="text-xs" style={{color:'#B8960A'}}>{level.nextAt - orderStats.total} orders away</div>
+                  <div className="text-xs mb-1" style={{color:'#B8430A'}}>next level</div>
+                  <div className="text-sm font-bold" style={{color:'#7A2C05'}}>{level.next === 'Silver' ? '🥈' : level.next === 'Gold' ? '🥇' : '💎'} {level.next}</div>
+                  <div className="text-xs" style={{color:'#B8430A'}}>{level.nextAt - orderStats.total} orders away</div>
                 </div>
               )}
             </div>
-            <div className="flex justify-between text-xs mb-1" style={{color:'#B8960A'}}>
+            <div className="flex justify-between text-xs mb-1" style={{color:'#B8430A'}}>
               {['🥉 Bronze','🥈 Silver','🥇 Gold','💎 Platinum'].map((l, i) => (
                 <span key={i} style={{opacity: i <= ['Bronze','Silver','Gold','Platinum'].indexOf(level.name) ? 1 : 0.35}}>{l}</span>
               ))}
             </div>
-            <div className="h-2 rounded-full overflow-hidden mb-3" style={{background:'#F5E080'}}>
-              <div className="h-2 rounded-full" style={{background:'#D4A900', width:`${progressPct}%`, transition:'width 1.2s ease'}} />
+            <div className="h-2 rounded-full overflow-hidden mb-3" style={{background:'#F7B893'}}>
+              <div className="h-2 rounded-full" style={{background:'#D4470C', width:`${progressPct}%`, transition:'width 1.2s ease'}} />
             </div>
-            <div className="text-xs mb-2" style={{color:'#B8960A'}}>
+            <div className="text-xs mb-2" style={{color:'#B8430A'}}>
               {loyaltyPoints >= (loyaltySettings?.min_points_redeem || 100) ? '✅ Ready to redeem on next order!' : `${(loyaltySettings?.min_points_redeem || 100) - loyaltyPoints} more points to unlock redemption`}
             </div>
             {orderStats.favourite && (
-              <div className="text-xs pt-3" style={{borderTop:'1px solid #E8C84A', color:'#8A6800'}}>
+              <div className="text-xs pt-3" style={{borderTop:'1px solid #F58B4C', color:'#8A3206'}}>
                 ❤️ Favourite: <strong>{orderStats.favourite}</strong>
               </div>
             )}
@@ -289,9 +289,9 @@ export default function AccountPage() {
           <div className="grid grid-cols-3 gap-2">
             {getBadges().map((b, i) => (
               <div key={i} className="rounded-2xl p-3 text-center"
-                style={{background: b.earned ? '#FFFDF5' : '#f9f9f9', border: b.earned ? '1.5px solid #E8C84A' : '1px solid #f0f0f0', opacity: b.earned ? 1 : 0.45}}>
+                style={{background: b.earned ? '#FFF9F5' : '#f9f9f9', border: b.earned ? '1.5px solid #F58B4C' : '1px solid #f0f0f0', opacity: b.earned ? 1 : 0.45}}>
                 <div className="text-2xl mb-1">{b.icon}</div>
-                <div className="text-xs font-semibold" style={{color: b.earned ? '#7A5F00' : '#aaa'}}>{b.name}</div>
+                <div className="text-xs font-semibold" style={{color: b.earned ? '#7A2C05' : '#aaa'}}>{b.name}</div>
               </div>
             ))}
           </div>
@@ -383,7 +383,7 @@ export default function AccountPage() {
                         </div>
                         {existingRating && (
                           <div className="flex items-center gap-1 mt-1.5">
-                            {[1,2,3,4,5].map(s => <Star key={s} size={11} fill={s <= existingRating.rating ? '#F5C800' : 'none'} stroke={s <= existingRating.rating ? '#F5C800' : '#ccc'} />)}
+                            {[1,2,3,4,5].map(s => <Star key={s} size={11} fill={s <= existingRating.rating ? '#F26A1B' : 'none'} stroke={s <= existingRating.rating ? '#F26A1B' : '#ccc'} />)}
                           </div>
                         )}
                       </div>
@@ -407,7 +407,7 @@ export default function AccountPage() {
                             {order.status === 'delivered' && (
                               <button onClick={() => openRating(order)}
                                 className="flex-1 py-2 rounded-xl text-sm font-semibold"
-                                style={{border:`1px solid ${existingRating ? '#F5C800' : '#e5e5e5'}`, background: existingRating ? '#FFFBE6' : 'white', color: existingRating ? '#8A6800' : '#555'}}>
+                                style={{border:`1px solid ${existingRating ? '#F26A1B' : '#e5e5e5'}`, background: existingRating ? '#FFF1E8' : 'white', color: existingRating ? '#8A3206' : '#555'}}>
                                 {existingRating ? `⭐ ${existingRating.rating}/5` : '⭐ Rate'}
                               </button>
                             )}
@@ -471,7 +471,7 @@ export default function AccountPage() {
             <div className="flex justify-center gap-3 mb-5">
               {[1,2,3,4,5].map(s => (
                 <button key={s} onMouseEnter={() => setStarHover(s)} onMouseLeave={() => setStarHover(0)} onClick={() => setStarSelected(s)}>
-                  <Star size={36} fill={(starHover || starSelected) >= s ? '#F5C800' : 'none'} stroke={(starHover || starSelected) >= s ? '#F5C800' : '#ddd'} />
+                  <Star size={36} fill={(starHover || starSelected) >= s ? '#F26A1B' : 'none'} stroke={(starHover || starSelected) >= s ? '#F26A1B' : '#ddd'} />
                 </button>
               ))}
             </div>
@@ -485,7 +485,7 @@ export default function AccountPage() {
                 style={{border:'1px solid #e5e5e5', color:'#555'}}>Cancel</button>
               <button onClick={submitRating} disabled={!starSelected || submitting}
                 className="flex-1 py-3 rounded-xl text-sm font-semibold"
-                style={{background: starSelected ? '#F5C800' : '#f5f5f5', color: starSelected ? '#1a1a1a' : '#aaa'}}>
+                style={{background: starSelected ? '#F26A1B' : '#f5f5f5', color: starSelected ? '#1a1a1a' : '#aaa'}}>
                 {submitting ? 'Saving...' : 'Submit'}
               </button>
             </div>

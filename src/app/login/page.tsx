@@ -129,7 +129,7 @@ function LoginContent() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4" style={{background: 'linear-gradient(135deg, #FFFDF0 0%, #FFF9D6 100%)'}}>
+    <main className="min-h-screen flex items-center justify-center px-4" style={{background: 'linear-gradient(135deg, #FFF7F2 0%, #FFE9DA 100%)'}}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex flex-col items-center gap-2">
@@ -153,7 +153,7 @@ function LoginContent() {
           {step === 'otp' ? (
             <div>
               <div className="text-center mb-6">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFF3B0'}}>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFD9BF'}}>
                   📧
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Check your email</h2>
@@ -173,7 +173,7 @@ function LoginContent() {
                   type="text"
                   value={otp}
                   onChange={e => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-yellow-400 transition-colors text-center text-2xl tracking-widest font-bold"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors text-center text-2xl tracking-widest font-bold"
                   placeholder="000000"
                   maxLength={6}
                 />
@@ -212,7 +212,7 @@ function LoginContent() {
 
               {mode === 'forgot' && (
                 <div className="text-center mb-6">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFF3B0'}}>
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFD9BF'}}>
                     🔑
                   </div>
                   <h2 className="text-xl font-bold text-gray-900">Forgot Password?</h2>
@@ -232,21 +232,21 @@ function LoginContent() {
                   <div>
                     <label className="text-xs font-medium text-gray-500 mb-1 block">Full Name *</label>
                     <input type="text" value={name} onChange={e => setName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors"
                       placeholder="John Smith" />
                   </div>
                 )}
                 <div>
                   <label className="text-xs font-medium text-gray-500 mb-1 block">Email *</label>
                   <input type="email" value={email} onChange={e => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors"
                     placeholder="john@example.com" />
                 </div>
                 {mode === 'signup' && (
                   <div>
                     <label className="text-xs font-medium text-gray-500 mb-1 block">Phone *</label>
                     <input type="tel" value={phone} onChange={e => setPhone(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors"
                       placeholder="04XX XXX XXX" />
                   </div>
                 )}
@@ -254,7 +254,7 @@ function LoginContent() {
                   <div>
                     <label className="text-xs font-medium text-gray-500 mb-1 block">Password *</label>
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors"
                       placeholder="••••••••" />
                   </div>
                 )}
@@ -263,7 +263,7 @@ function LoginContent() {
               {mode === 'login' && (
                 <div className="text-right mt-2">
                   <button onClick={() => switchMode('forgot')}
-                    className="text-xs font-medium hover:underline" style={{color: '#D4A900'}}>
+                    className="text-xs font-medium hover:underline" style={{color: '#D4470C'}}>
                     Forgot Password?
                   </button>
                 </div>

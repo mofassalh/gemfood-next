@@ -93,13 +93,13 @@ function OrderConfirmedContent() {
 
           {pointsEarned > 0 && (
             <div className="rounded-2xl p-4 mb-4 flex items-center gap-3"
-              style={{ background: '#FFF9E0', border: '1px solid #E8C84A' }}>
+              style={{ background: '#FFEEE2', border: '1px solid #F58B4C' }}>
               <span className="text-2xl">⭐</span>
               <div className="text-left">
-                <div className="font-semibold text-sm" style={{ color: '#8A6800' }}>
+                <div className="font-semibold text-sm" style={{ color: '#8A3206' }}>
                   You earned {pointsEarned} loyalty points!
                 </div>
-                <div className="text-xs mt-0.5" style={{ color: '#B8960A' }}>
+                <div className="text-xs mt-0.5" style={{ color: '#B8430A' }}>
                   Keep ordering to unlock rewards
                 </div>
               </div>
@@ -140,7 +140,7 @@ function OrderConfirmedContent() {
               Track My Order
             </Link>
             <Link href="/menu"
-              className="w-full py-3 rounded-full font-semibold block border-2 transition-all hover:bg-yellow-50"
+              className="w-full py-3 rounded-full font-semibold block border-2 transition-all hover:bg-orange-50"
               style={{borderColor: 'var(--color-primary)', color: 'var(--color-primary)'}}>
               Order More
             </Link>

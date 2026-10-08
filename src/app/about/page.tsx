@@ -34,7 +34,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       <Navbar selectedLocation={null} onLocationClick={() => {}} />
 
-      <section className="pt-32 pb-16 px-4 sm:px-6" style={{background: 'linear-gradient(135deg, #F5C800 0%, #F5C800cc 100%)'}}>
+      <section className="pt-32 pb-16 px-4 sm:px-6" style={{background: 'linear-gradient(135deg, #F26A1B 0%, #F5C800cc 100%)'}}>
         <div className="max-w-3xl mx-auto text-center">
           <img src="/logo.jpg" alt={restaurantName} className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover mx-auto mb-6 shadow-lg" />
           <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-4" style={{fontFamily: 'var(--font-display)'}}>
@@ -68,18 +68,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 px-4 sm:px-6" style={{background: '#FFFDF0'}}>
+      <section className="py-12 px-4 sm:px-6" style={{background: '#FFF7F2'}}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-white rounded-2xl p-6 text-center border border-yellow-100">
-            <div className="text-3xl font-bold mb-1" style={{color: '#F5C800'}}>{loading ? '—' : locationCount}</div>
+          <div className="bg-white rounded-2xl p-6 text-center border border-orange-100">
+            <div className="text-3xl font-bold mb-1" style={{color: '#F26A1B'}}>{loading ? '—' : locationCount}</div>
             <div className="text-sm text-gray-500">Locations</div>
           </div>
-          <div className="bg-white rounded-2xl p-6 text-center border border-yellow-100">
-            <div className="text-3xl font-bold mb-1" style={{color: '#F5C800'}}>{loading ? '—' : `${menuCount}+`}</div>
+          <div className="bg-white rounded-2xl p-6 text-center border border-orange-100">
+            <div className="text-3xl font-bold mb-1" style={{color: '#F26A1B'}}>{loading ? '—' : `${menuCount}+`}</div>
             <div className="text-sm text-gray-500">Menu Items</div>
           </div>
-          <div className="bg-white rounded-2xl p-6 text-center border border-yellow-100">
-            <div className="text-3xl font-bold mb-1" style={{color: '#F5C800'}}>100%</div>
+          <div className="bg-white rounded-2xl p-6 text-center border border-orange-100">
+            <div className="text-3xl font-bold mb-1" style={{color: '#F26A1B'}}>100%</div>
             <div className="text-sm text-gray-500">Halal Certified</div>
           </div>
         </div>
@@ -88,21 +88,21 @@ export default function AboutPage() {
       <section className="py-16 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFF3B0'}}>🚀</div>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>🚀</div>
             <div>
               <h3 className="font-bold text-gray-900 mb-1">Fast Pickup</h3>
               <p className="text-sm text-gray-500">Ready in 15-20 minutes. Skip the queue with online ordering.</p>
             </div>
           </div>
           <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFF3B0'}}>🌿</div>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>🌿</div>
             <div>
               <h3 className="font-bold text-gray-900 mb-1">Fresh Daily</h3>
               <p className="text-sm text-gray-500">Locally sourced produce and premium meats, prepared every day.</p>
             </div>
           </div>
           <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFF3B0'}}>📍</div>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={{background: '#FFD9BF'}}>📍</div>
             <div>
               <h3 className="font-bold text-gray-900 mb-1">Locally Sourced</h3>
               <p className="text-sm text-gray-500">Supporting our Melbourne community, one order at a time.</p>
@@ -111,7 +111,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 px-4 sm:px-6" style={{background: '#FFFDF0'}}>
+      <section className="py-16 px-4 sm:px-6" style={{background: '#FFF7F2'}}>
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8" style={{fontFamily: 'var(--font-display)'}}>Loved by Our Community</h2>
           <div className="rounded-2xl overflow-hidden shadow-lg max-w-2xl mx-auto">
@@ -124,7 +124,7 @@ export default function AboutPage() {
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4" style={{fontFamily: 'var(--font-display)'}}>
           Ready to taste the difference?
         </h2>
-        <Link href="/menu" className="inline-block mt-2 px-8 py-3 rounded-full font-semibold transition-all hover:shadow-lg hover:scale-105" style={{background: '#F5C800', color: '#1A1A1A'}}>
+        <Link href="/menu" className="inline-block mt-2 px-8 py-3 rounded-full font-semibold transition-all hover:shadow-lg hover:scale-105" style={{background: '#F26A1B', color: '#1A1A1A'}}>
           Order Now
         </Link>
       </section>

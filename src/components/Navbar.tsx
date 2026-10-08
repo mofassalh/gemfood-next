@@ -63,7 +63,7 @@ export default function Navbar({ selectedLocation, onLocationClick }: NavbarProp
             }
             <span className="font-bold text-sm sm:text-lg whitespace-nowrap truncate max-w-[140px] sm:max-w-none" style={{fontFamily: 'var(--font-sans)'}}>{restaurantName}</span>
           </Link>
-          <button onClick={onLocationClick} className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 hover:border-yellow-400 hover:bg-yellow-50 transition-all text-sm font-medium">
+          <button onClick={onLocationClick} className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-sm font-medium">
             <svg className="w-4 h-4" style={{color: 'var(--color-primary)'}} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />

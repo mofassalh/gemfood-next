@@ -318,7 +318,7 @@ export default function CheckoutPage() {
 
                 <div className="bg-white rounded-2xl border border-gray-100 p-5">
                   {suggestedCoupon && !coupon && (
-                    <div className="flex items-center justify-between gap-3 p-3 rounded-xl mb-4" style={{ background: '#FFF9E0', border: '1px solid #F5C800' }}>
+                    <div className="flex items-center justify-between gap-3 p-3 rounded-xl mb-4" style={{ background: '#FFEEE2', border: '1px solid #F26A1B' }}>
                       <div>
                         <div className="font-semibold text-sm text-gray-900">🎉 First order? Get {suggestedCoupon.type === 'percent' ? `${suggestedCoupon.value}%` : `$${suggestedCoupon.value}`} off!</div>
                         <div className="text-xs text-gray-600 mt-0.5">Code: {suggestedCoupon.code}</div>
@@ -326,7 +326,7 @@ export default function CheckoutPage() {
                       <button onClick={() => { setCouponCode(suggestedCoupon.code); applyCoupon(suggestedCoupon.code) }}
                         disabled={applyingCoupon}
                         className="text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap disabled:opacity-50"
-                        style={{ background: '#F5C800', color: '#1a1a1a' }}>
+                        style={{ background: '#F26A1B', color: '#1a1a1a' }}>
                         {applyingCoupon ? '...' : 'Apply'}
                       </button>
                     </div>

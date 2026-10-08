@@ -45,7 +45,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const settings = await getSettings()
-  const primaryColor = settings.primary_color || '#F5C800'
+  const primaryColor = settings.primary_color || '#F26A1B'
   const businessName = settings.business_name || "Angie's Kebabs & Burgers"
 
   const structuredData = {

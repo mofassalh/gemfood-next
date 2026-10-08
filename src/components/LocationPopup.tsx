@@ -51,7 +51,7 @@ export default function LocationPopup({ onSelect, onClose }: LocationPopupProps)
         </button>
 
         <div className="text-center mb-6">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFF3B0'}}>
+          <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFD9BF'}}>
             📍
           </div>
           <h2 className="text-xl font-bold text-gray-900" style={{fontFamily: 'var(--font-display)'}}>
@@ -74,18 +74,18 @@ export default function LocationPopup({ onSelect, onClose }: LocationPopupProps)
               <button
                 key={location.id}
                 onClick={() => onSelect(location.id, location.name)}
-                className="w-full text-left p-4 rounded-2xl border-2 border-gray-100 hover:border-yellow-400 hover:bg-yellow-50 transition-all group"
+                className="w-full text-left p-4 rounded-2xl border-2 border-gray-100 hover:border-orange-400 hover:bg-orange-50 transition-all group"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-semibold text-gray-900 group-hover:text-yellow-700 transition-colors">
+                    <div className="font-semibold text-gray-900 group-hover:text-orange-700 transition-colors">
                       {location.name}
                     </div>
                     <div className="text-sm text-gray-500 mt-0.5">{location.address}</div>
                     <div className="text-xs text-gray-400 mt-0.5">{location.phone}</div>
                   </div>
-                  <div className="w-8 h-8 rounded-full border-2 border-gray-200 group-hover:border-yellow-400 flex items-center justify-center transition-all flex-shrink-0" style={{}}>
-                    <svg className="w-4 h-4 text-gray-400 group-hover:text-yellow-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-8 h-8 rounded-full border-2 border-gray-200 group-hover:border-orange-400 flex items-center justify-center transition-all flex-shrink-0" style={{}}>
+                    <svg className="w-4 h-4 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>

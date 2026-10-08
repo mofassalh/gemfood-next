@@ -38,7 +38,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">4. Refunds & Cancellations</h2>
-            <p>Once an order is confirmed and preparation has begun, cancellations may not be possible. For issues with your order, please contact us within 24 hours at <a href="mailto:hello@angiesknb.com" className="text-yellow-600 hover:underline">hello@angiesknb.com</a>.</p>
+            <p>Once an order is confirmed and preparation has begun, cancellations may not be possible. For issues with your order, please contact us within 24 hours at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a>.</p>
           </section>
 
           <section>
@@ -63,7 +63,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">9. Contact</h2>
-            <p>Questions? Contact us at <a href="mailto:hello@angiesknb.com" className="text-yellow-600 hover:underline">hello@angiesknb.com</a></p>
+            <p>Questions? Contact us at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a></p>
           </section>
 
         </div>

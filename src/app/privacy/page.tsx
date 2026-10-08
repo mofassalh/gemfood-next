@@ -49,17 +49,17 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">6. Your Rights</h2>
-            <p>Under the Australian Privacy Act 1988, you have the right to access, correct, or delete your personal information. Contact us at <a href="mailto:hello@angiesknb.com" className="text-yellow-600 hover:underline">hello@angiesknb.com</a> to exercise these rights.</p>
+            <p>Under the Australian Privacy Act 1988, you have the right to access, correct, or delete your personal information. Contact us at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a> to exercise these rights.</p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">7. Cookies</h2>
-            <p>We use cookies to maintain your session, remember your preferences, and improve site performance. See our <Link href="/cookies" className="text-yellow-600 hover:underline">Cookie Policy</Link> for details.</p>
+            <p>We use cookies to maintain your session, remember your preferences, and improve site performance. See our <Link href="/cookies" className="text-orange-600 hover:underline">Cookie Policy</Link> for details.</p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">8. Contact Us</h2>
-            <p>For privacy inquiries, contact us at <a href="mailto:hello@angiesknb.com" className="text-yellow-600 hover:underline">hello@angiesknb.com</a></p>
+            <p>For privacy inquiries, contact us at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a></p>
           </section>
 
         </div>

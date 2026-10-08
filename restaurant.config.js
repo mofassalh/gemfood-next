@@ -9,7 +9,7 @@ module.exports = {
   description: "Handcrafted kebabs and gourmet burgers made with the freshest ingredients.",
   
   // Brand Colors
-  primaryColor: "#F5C800",
+  primaryColor: "#F26A1B",
   darkColor: "#1A1A1A",
   
   // Contact

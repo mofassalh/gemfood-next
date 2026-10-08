@@ -140,7 +140,7 @@ export default function FeaturedItems({ onOrderClick }: FeaturedItemsProps) {
         <div className="text-center mt-10">
           <button
             onClick={handleViewMenu}
-            className="px-8 py-3 rounded-full font-semibold border-2 transition-all hover:bg-yellow-50"
+            className="px-8 py-3 rounded-full font-semibold border-2 transition-all hover:bg-orange-50"
             style={{borderColor: 'var(--color-primary)', color: 'var(--color-primary)'}}>
             View Full Menu
           </button>

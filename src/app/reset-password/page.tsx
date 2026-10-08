@@ -48,7 +48,7 @@ function ResetPasswordContent() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4" style={{background: 'linear-gradient(135deg, #FFFDF0 0%, #FFF9D6 100%)'}}>
+    <main className="min-h-screen flex items-center justify-center px-4" style={{background: 'linear-gradient(135deg, #FFF7F2 0%, #FFE9DA 100%)'}}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex flex-col items-center gap-2">
@@ -65,7 +65,7 @@ function ResetPasswordContent() {
 
         <div className="bg-white rounded-3xl shadow-xl p-8">
           <div className="text-center mb-6">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFF3B0'}}>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3" style={{background: '#FFD9BF'}}>
               🔐
             </div>
             <h2 className="text-xl font-bold text-gray-900">Set New Password</h2>
@@ -82,7 +82,7 @@ function ResetPasswordContent() {
           {!validSession ? (
             <div className="text-center py-4">
               <p className="text-sm text-gray-500 mb-4">This reset link is invalid or has expired.</p>
-              <Link href="/login" className="font-semibold text-sm hover:underline" style={{color: '#D4A900'}}>
+              <Link href="/login" className="font-semibold text-sm hover:underline" style={{color: '#D4470C'}}>
                 Request a new reset link
               </Link>
             </div>
@@ -92,13 +92,13 @@ function ResetPasswordContent() {
                 <div>
                   <label className="text-xs font-medium text-gray-500 mb-1 block">New Password *</label>
                   <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors"
                     placeholder="••••••••" />
                 </div>
                 <div>
                   <label className="text-xs font-medium text-gray-500 mb-1 block">Confirm Password *</label>
                   <input type="password" value={confirm} onChange={e => setConfirm(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-yellow-400 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 transition-colors"
                     placeholder="••••••••" />
                 </div>
               </div>

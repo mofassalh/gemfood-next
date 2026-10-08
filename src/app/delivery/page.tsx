@@ -49,7 +49,7 @@ export default function DeliveryPage() {
                   <div className="text-xs text-gray-400 mt-0.5">We're working on it!</div>
                 </div>
               </div>
-              <span className="text-xs px-3 py-1 rounded-full font-semibold" style={{background:'#FFF3B0', color:'#D97706'}}>Soon</span>
+              <span className="text-xs px-3 py-1 rounded-full font-semibold" style={{background:'#FFD9BF', color:'#D97706'}}>Soon</span>
             </div>
           ) : (
             <button onClick={handleOrderDelivery}
