@@ -14,12 +14,12 @@ module.exports = {
   
   // Contact
   phone: "+1 727-954-0001",
-  email: "hello@angiesknb.com",
+  email: "",
   website: "https://gemfoodeat.com",
   
   // Social
-  instagram: "https://instagram.com/angiesknb",
-  facebook: "https://facebook.com/angiesknb",
+  instagram: "",
+  facebook: "",
   
   // Locations
   locations: [

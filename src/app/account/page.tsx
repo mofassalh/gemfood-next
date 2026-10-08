@@ -176,7 +176,7 @@ export default function AccountPage() {
     setRatingModal(null)
   }
 
-  const formatDate = (str: string) => new Date(str).toLocaleDateString('en-AU', {
+  const formatDate = (str: string) => new Date(str).toLocaleDateString('en-US', {
     day: 'numeric', month: 'short', year: 'numeric'
   })
 
@@ -317,7 +317,7 @@ export default function AccountPage() {
             <div className="grid grid-cols-2 gap-3">
               {[
                 { label: 'full name', value: profile.full_name },
-                { label: 'member since', value: user?.created_at ? new Date(user.created_at).toLocaleDateString('en-AU', { month: 'long', year: 'numeric' }) : '' },
+                { label: 'member since', value: user?.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '' },
                 { label: 'phone', value: profile.phone },
                 { label: 'favourite item', value: orderStats.favourite ? `🥙 ${orderStats.favourite}` : '—' },
               ].map(({ label, value }) => (
@@ -434,7 +434,7 @@ export default function AccountPage() {
             <div className="space-y-3 mb-5">
               {[
                 { key: 'full_name', label: 'Full Name', placeholder: 'Your full name' },
-                { key: 'phone', label: 'Phone', placeholder: '+61 4XX XXX XXX' },
+                { key: 'phone', label: 'Phone', placeholder: '+1 727 XXX XXXX' },
                 { key: 'address', label: 'Default Address', placeholder: '123 Main St, St. Petersburg' },
               ].map(({ key, label, placeholder }) => (
                 <div key={key}>

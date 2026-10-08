@@ -12,7 +12,7 @@ export default function PrivacyPage() {
         <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 mb-8 block">← Back to Home</Link>
         
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
-        <p className="text-sm text-gray-400 mb-8">Last updated: June 2026</p>
+        <p className="text-sm text-gray-400 mb-8">Last updated: October 2026</p>
 
         <div className="bg-white rounded-2xl p-8 space-y-6 text-gray-600 text-sm leading-relaxed">
           
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">4. Data Sharing</h2>
-            <p>We do not sell your personal information to third parties. We may share data with delivery partners (Uber Direct) solely for the purpose of fulfilling your delivery orders.</p>
+            <p>We do not sell your personal information to third parties. We may share data with delivery partners solely for the purpose of fulfilling your delivery orders.</p>
           </section>
 
           <section>
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">6. Your Rights</h2>
-            <p>Under the Australian Privacy Act 1988, you have the right to access, correct, or delete your personal information. Contact us at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a> to exercise these rights.</p>
+            <p>Depending on where you live, you may have the right to access, correct, or delete your personal information. Call us at <a href="tel:+17279540001" className="text-orange-600 hover:underline">+1 727-954-0001</a> to exercise these rights.</p>
           </section>
 
           <section>
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">8. Contact Us</h2>
-            <p>For privacy inquiries, contact us at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a></p>
+            <p>For privacy inquiries, call us at <a href="tel:+17279540001" className="text-orange-600 hover:underline">+1 727-954-0001</a></p>
           </section>
 
         </div>

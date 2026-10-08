@@ -12,7 +12,7 @@ export default function TermsPage() {
         <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 mb-8 block">← Back to Home</Link>
         
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Terms of Service</h1>
-        <p className="text-sm text-gray-400 mb-8">Last updated: June 2026</p>
+        <p className="text-sm text-gray-400 mb-8">Last updated: October 2026</p>
 
         <div className="bg-white rounded-2xl p-8 space-y-6 text-gray-600 text-sm leading-relaxed">
 
@@ -25,7 +25,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-gray-900 mb-2">2. Ordering</h2>
             <ul className="list-disc pl-5 space-y-1">
               <li>Orders are subject to availability</li>
-              <li>Prices are in Australian Dollars (AUD) and include GST</li>
+              <li>Prices are in US Dollars (USD). Any applicable tax is shown at checkout</li>
               <li>We reserve the right to refuse or cancel orders</li>
               <li>Order confirmation does not guarantee fulfillment in case of unforeseen circumstances</li>
             </ul>
@@ -38,7 +38,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">4. Refunds & Cancellations</h2>
-            <p>Once an order is confirmed and preparation has begun, cancellations may not be possible. For issues with your order, please contact us within 24 hours at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a>.</p>
+            <p>Once an order is confirmed and preparation has begun, cancellations may not be possible. For issues with your order, please contact us within 24 hours at <a href="tel:+17279540001" className="text-orange-600 hover:underline">+1 727-954-0001</a>.</p>
           </section>
 
           <section>
@@ -53,17 +53,17 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">7. Limitation of Liability</h2>
-            <p>To the extent permitted by Australian law, Gem Food is not liable for any indirect, incidental, or consequential damages arising from use of our services.</p>
+            <p>To the extent permitted by applicable law, Gem Food is not liable for any indirect, incidental, or consequential damages arising from use of our services.</p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">8. Governing Law</h2>
-            <p>These terms are governed by the laws of Victoria, Australia.</p>
+            <p>These terms are governed by the laws of the State of Florida, United States.</p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">9. Contact</h2>
-            <p>Questions? Contact us at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a></p>
+            <p>Questions? Call us at <a href="tel:+17279540001" className="text-orange-600 hover:underline">+1 727-954-0001</a></p>
           </section>
 
         </div>

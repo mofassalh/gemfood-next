@@ -55,7 +55,7 @@ export default function CookiesPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">Contact</h2>
-            <p>Questions about our cookie use? Email us at <a href="mailto:hello@angiesknb.com" className="text-orange-600 hover:underline">hello@angiesknb.com</a></p>
+            <p>Questions about our cookie use? Call us at <a href="tel:+17279540001" className="text-orange-600 hover:underline">+1 727-954-0001</a></p>
           </section>
 
         </div>

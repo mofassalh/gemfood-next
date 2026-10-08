@@ -293,13 +293,13 @@ export default function CheckoutPage() {
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="text-xs font-medium text-gray-500 mb-1 block">Suburb *</label>
+                          <label className="text-xs font-medium text-gray-500 mb-1 block">City *</label>
                           <input type="text" value={form.suburb} onChange={e => setForm({...form, suburb: e.target.value})}
                             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
                             placeholder="St. Petersburg" />
                         </div>
                         <div>
-                          <label className="text-xs font-medium text-gray-500 mb-1 block">Postcode *</label>
+                          <label className="text-xs font-medium text-gray-500 mb-1 block">ZIP code *</label>
                           <input type="text" value={form.postcode} onChange={e => setForm({...form, postcode: e.target.value})}
                             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
                             placeholder="3021" />
@@ -431,7 +431,7 @@ export default function CheckoutPage() {
             {step === 3 && (
               <div className="bg-white rounded-2xl border border-gray-100 p-5">
                 <h3 className="font-semibold text-gray-900 mb-5">💳 Payment</h3>
-                <Elements stripe={stripePromise} options={{ mode: 'payment', amount: Math.round(finalTotal * 100), currency: 'aud' }}>
+                <Elements stripe={stripePromise} options={{ mode: 'payment', amount: Math.round(finalTotal * 100), currency: 'usd' }}>
                   <StripePaymentForm
                     onSuccess={handleOrderPlace}
                     loading={loading}

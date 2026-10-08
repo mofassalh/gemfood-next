@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   })
 
   try {
-    const { amount, currency = 'aud', metadata = {} } = await req.json()
+    const { amount, currency = 'usd', metadata = {} } = await req.json()
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100),
       currency,
