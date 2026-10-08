@@ -80,7 +80,7 @@ export const useCartStore = create<CartStore>()(
       },
 
       getGST: () => {
-        return Math.round(get().getSubtotal() * 0.10 * 100) / 100
+        return Math.round(get().getSubtotal() * 0.07 * 100) / 100
       },
 
       getTotal: () => {

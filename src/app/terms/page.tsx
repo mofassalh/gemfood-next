@@ -25,7 +25,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-gray-900 mb-2">2. Ordering</h2>
             <ul className="list-disc pl-5 space-y-1">
               <li>Orders are subject to availability</li>
-              <li>Prices are in US Dollars (USD). Any applicable tax is shown at checkout</li>
+              <li>Prices are in US Dollars (USD). Florida sales tax (7%) is added at checkout</li>
               <li>We reserve the right to refuse or cancel orders</li>
               <li>Order confirmation does not guarantee fulfillment in case of unforeseen circumstances</li>
             </ul>
