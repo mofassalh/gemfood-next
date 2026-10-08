@@ -7,12 +7,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/admin',
-        destination: 'https://angies-admin.vercel.app',
+        destination: 'https://gemfood-admin.vercel.app',
         permanent: false,
       },
       {
         source: '/admin/:path*',
-        destination: 'https://angies-admin.vercel.app/admin/:path*',
+        destination: 'https://gemfood-admin.vercel.app/admin/:path*',
         permanent: false,
       },
     ]
