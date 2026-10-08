@@ -7,7 +7,7 @@ import LocationPopup from '@/components/LocationPopup'
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
 import FeaturedItems from '@/components/FeaturedItems'
-import PromoSection from '@/components/PromoSection'
+import ReviewsSection from '@/components/ReviewsSection'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -66,7 +66,7 @@ export default function Home() {
       />
       <HeroSection onOrderClick={handleOrderClick} />
       <FeaturedItems onOrderClick={handleOrderClick} />
-      <PromoSection onOrderClick={handleOrderClick} />
+      <ReviewsSection />
       <Footer />
       {showLocationPopup && locationCount !== 1 && (
         <LocationPopup
