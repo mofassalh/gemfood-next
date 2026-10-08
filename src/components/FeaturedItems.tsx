@@ -94,7 +94,7 @@ export default function FeaturedItems({ onOrderClick }: FeaturedItemsProps) {
             Featured Items
           </div>
           <h2 className="text-4xl font-bold" style={{fontFamily: 'var(--font-display)'}}>
-            Customer Favourites
+            Customer Favorites
           </h2>
           <p className="text-gray-500 mt-3 max-w-md mx-auto">
             Our most loved dishes, made fresh to order every single time

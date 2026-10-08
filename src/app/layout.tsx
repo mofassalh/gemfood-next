@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${businessName}`,
     },
     description,
-    keywords: ['halal', 'halal food', 'online order', 'St. Petersburg', 'Florida', 'takeaway', 'pickup'],
+    keywords: ['halal', 'halal food', 'online order', 'St. Petersburg', 'Florida', 'takeout', 'pickup'],
     icons: { icon: '/logo.jpg', apple: '/logo.jpg' },
     openGraph: {
       title: businessName,

@@ -277,7 +277,7 @@ export default function AccountPage() {
             </div>
             {orderStats.favourite && (
               <div className="text-xs pt-3" style={{borderTop:'1px solid #F58B4C', color:'#8A3206'}}>
-                ❤️ Favourite: <strong>{orderStats.favourite}</strong>
+                ❤️ Favorite: <strong>{orderStats.favourite}</strong>
               </div>
             )}
           </div>
@@ -319,7 +319,7 @@ export default function AccountPage() {
                 { label: 'full name', value: profile.full_name },
                 { label: 'member since', value: user?.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '' },
                 { label: 'phone', value: profile.phone },
-                { label: 'favourite item', value: orderStats.favourite ? `🥙 ${orderStats.favourite}` : '—' },
+                { label: 'favorite item', value: orderStats.favourite ? `🥙 ${orderStats.favourite}` : '—' },
               ].map(({ label, value }) => (
                 <div key={label} className="bg-white rounded-2xl p-3" style={{border:'1px solid #f0f0f0'}}>
                   <div className="text-xs text-gray-400 mb-1">{label}</div>
