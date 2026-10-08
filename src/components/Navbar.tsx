@@ -13,7 +13,8 @@ interface NavbarProps {
   onLocationClick: () => void
 }
 
-export default function Navbar({ selectedLocation, onLocationClick }: NavbarProps) {
+// The location props are kept so existing pages still compile; the dropdown was removed (single location)
+export default function Navbar(_props: NavbarProps) {
   const [settings, setSettings] = useState<any>({})
   const [user, setUser] = useState<any>(null)
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -63,16 +64,6 @@ export default function Navbar({ selectedLocation, onLocationClick }: NavbarProp
             }
             <span className="font-bold text-sm sm:text-lg whitespace-nowrap truncate max-w-[140px] sm:max-w-none" style={{fontFamily: 'var(--font-sans)'}}>{restaurantName}</span>
           </Link>
-          <button onClick={onLocationClick} className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-sm font-medium">
-            <svg className="w-4 h-4" style={{color: 'var(--color-primary)'}} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span className="text-gray-700">{selectedLocation || 'Select Location'}</span>
-            <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
           <div className="flex items-center gap-3">
             <Link href="/cart" className="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
               <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
