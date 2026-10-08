@@ -60,9 +60,10 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
   const heroTitle3 = settings.hero_title3 || 'Made Fresh'
   const primaryColor = settings.primary_color || '#F26A1B'
   const locationCount = settings.location_count || '1'
-  const menuItemCount = settings.menu_item_count || '50+'
-  const rating = settings.hero_rating || '4.8★'
-  const popularItem = settings.popular_item || 'Our Best Seller'
+  const menuItemCount = settings.menu_item_count || ''
+  const rating = settings.hero_rating || ''
+  const reviewCount = settings.hero_review_count || ''
+  const popularItem = settings.popular_item || ''
 
   const images = gallery.length >= 4
     ? gallery.map((g: any) => g.image_url)
@@ -159,14 +160,18 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
                 <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{locationCount}</div>
                 <div className="text-sm text-gray-500">Locations</div>
               </div>
-              <div>
-                <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{menuItemCount}</div>
-                <div className="text-sm text-gray-500">Menu Items</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{rating}</div>
-                <div className="text-sm text-gray-500">Rating</div>
-              </div>
+              {menuItemCount && (
+                <div>
+                  <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{menuItemCount}</div>
+                  <div className="text-sm text-gray-500">Menu Items</div>
+                </div>
+              )}
+              {rating && (
+                <div>
+                  <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{rating}</div>
+                  <div className="text-sm text-gray-500">Rating</div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -197,21 +202,25 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
                 </div>
               )}
 
-              <div className="absolute -top-4 left-4 bg-white rounded-2xl shadow-lg px-3 py-2 flex items-center gap-2">
-                <span className="text-xl">🔥</span>
-                <div>
-                  <div className="text-xs font-bold text-gray-800">Most Popular</div>
-                  <div className="text-xs text-gray-400">{popularItem}</div>
+              {popularItem && (
+                <div className="absolute -top-4 left-4 bg-white rounded-2xl shadow-lg px-3 py-2 flex items-center gap-2">
+                  <span className="text-xl">🔥</span>
+                  <div>
+                    <div className="text-xs font-bold text-gray-800">Most Popular</div>
+                    <div className="text-xs text-gray-400">{popularItem}</div>
+                  </div>
                 </div>
-              </div>
+              )}
 
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-3 py-2 flex items-center gap-2 whitespace-nowrap">
-                <span className="text-xl">⭐</span>
-                <div>
-                  <div className="text-xs font-bold text-gray-800">{rating} Rating</div>
-                  <div className="text-xs text-gray-400">500+ reviews</div>
+              {rating && (
+                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-3 py-2 flex items-center gap-2 whitespace-nowrap">
+                  <span className="text-xl">⭐</span>
+                  <div>
+                    <div className="text-xs font-bold text-gray-800">{rating} Rating</div>
+                    {reviewCount && <div className="text-xs text-gray-400">{reviewCount} reviews</div>}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
