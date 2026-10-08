@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { createClient } from '@/lib/supabase'
 import { RESTAURANT_ID } from '@/lib/restaurant'
 
@@ -52,176 +51,81 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
     })
   }, [])
 
-  const businessName = settings.business_name || 'Our Restaurant'
+  const businessName = settings.business_name || 'Gem Food'
   const tagline = settings.tagline || 'Order online for pickup or delivery'
   const badge = settings.hero_badge || ''
   const heroTitle1 = settings.hero_title1 || '100%'
   const heroTitle2 = settings.hero_title2 || 'Halal Food'
   const heroTitle3 = settings.hero_title3 || 'Made Fresh'
   const primaryColor = settings.primary_color || '#F26A1B'
-  const locationCount = settings.location_count || '1'
+  const heroInfo = settings.hero_info || 'Open daily, 11 AM to 11 PM'
   const menuItemCount = settings.menu_item_count || ''
   const rating = settings.hero_rating || ''
   const reviewCount = settings.hero_review_count || ''
-  const popularItem = settings.popular_item || ''
-
-  const images = gallery.length >= 4
-    ? gallery.map((g: any) => g.image_url)
-    : [
-        settings.hero_image1 || '',
-        settings.hero_image2 || '',
-        settings.hero_image3 || '',
-        settings.hero_image4 || '',
-      ]
+  const heroImage = gallery[0]?.image_url || settings.hero_image1 || '/hero.jpg'
 
   if (!loaded) return (
-    <section className="pt-16 flex items-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #FFF7F2 0%, #FFE9DA 50%, #FFFAF6 100%)' }}>
-      <style>{`
-        @keyframes shimmer { 0%{background-position:-400px 0} 100%{background-position:400px 0} }
-        .sk { background: linear-gradient(90deg,#F5C8A8 25%,#EDA57A 50%,#F5C8A8 75%); background-size:800px 100%; animation:shimmer 1.5s infinite; border-radius:6px; }
-      `}</style>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="sk h-6 w-40 mb-6 rounded-full" />
-            <div className="sk h-10 w-64 mb-3" />
-            <div className="sk h-10 w-48 mb-3" />
-            <div className="sk h-10 w-56 mb-8" />
-            <div className="sk h-5 w-80 mb-2" />
-            <div className="sk h-5 w-60 mb-8" />
-            <div className="flex gap-4 mb-12">
-              <div className="sk h-12 w-32 rounded-full" />
-              <div className="sk h-12 w-32 rounded-full" />
-            </div>
-            <div className="flex gap-8 pt-8 border-t border-orange-200">
-              <div><div className="sk h-7 w-10 mb-1" /><div className="sk h-4 w-16" /></div>
-              <div><div className="sk h-7 w-10 mb-1" /><div className="sk h-4 w-16" /></div>
-              <div><div className="sk h-7 w-10 mb-1" /><div className="sk h-4 w-16" /></div>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <div className="relative w-72 h-72 lg:w-96 lg:h-96">
-              <div className="sk absolute inset-0 rounded-full" />
-            </div>
-          </div>
+    <section className="pt-16 relative overflow-hidden" style={{ background: '#1A1A1A' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
+        <div className="h-12 w-64 mb-3 rounded-lg" style={{ background: '#2A2A2A' }} />
+        <div className="h-12 w-80 max-w-full mb-8 rounded-lg" style={{ background: '#2A2A2A' }} />
+        <div className="h-5 w-72 max-w-full mb-10 rounded" style={{ background: '#2A2A2A' }} />
+        <div className="flex gap-4">
+          <div className="h-14 w-36 rounded-full" style={{ background: '#2A2A2A' }} />
+          <div className="h-14 w-36 rounded-full" style={{ background: '#2A2A2A' }} />
         </div>
       </div>
     </section>
   )
 
   return (
-    <section className="pt-16 flex items-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #FFF7F2 0%, #FFE9DA 50%, #FFFAF6 100%)' }}>
+    <section className="pt-16 relative overflow-hidden" style={{ background: '#1A1A1A' }}>
 
-      <div className="absolute top-20 right-0 w-96 h-96 rounded-full opacity-20"
-        style={{ background: primaryColor, filter: 'blur(80px)' }} />
-      <div className="absolute bottom-20 left-0 w-64 h-64 rounded-full opacity-10"
-        style={{ background: primaryColor, filter: 'blur(60px)' }} />
+      {/* Food photo: full background on phones, right side on desktop */}
+      <div className="absolute inset-0 lg:left-[40%]">
+        <img src={heroImage} alt={`Food from ${businessName}`} className="w-full h-full object-cover" />
+      </div>
+      <div className="absolute inset-0 lg:hidden" style={{ background: 'rgba(26,26,26,0.85)' }} />
+      <div className="absolute inset-0 hidden lg:block"
+        style={{ background: 'linear-gradient(90deg, #1A1A1A 0%, #1A1A1A 40%, rgba(26,26,26,0.6) 58%, rgba(26,26,26,0) 82%)' }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full relative" style={{ zIndex: 1 }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
-          {/* Left — Text */}
-          <div>
-            {badge && (
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
-                style={{ background: '#FFD9BF', color: '#1A1A1A' }}>
-                <span className="w-1.5 h-1.5 rounded-full" style={{ background: primaryColor }}></span>
-                {badge}
-              </div>
-            )}
-
-            <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6"
-              style={{ fontFamily: 'var(--font-display)', color: '#1A1A1A' }}>
-              {heroTitle1}{' '}
-              <span style={{ color: '#D4470C' }}>{heroTitle2}</span>
-              <br />
-              {heroTitle3}
-            </h1>
-
-            <p className="text-lg text-gray-500 mb-8 leading-relaxed max-w-md">
-              {tagline}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button onClick={onOrderClick}
-                className="px-8 py-4 rounded-full font-semibold text-base transition-all hover:shadow-lg hover:scale-105 active:scale-95"
-                style={{ background: primaryColor, color: '#1A1A1A' }}>
-                Order Now
-              </button>
-              <button onClick={onOrderClick}
-                className="px-8 py-4 rounded-full font-semibold text-base border-2 transition-all hover:bg-orange-50"
-                style={{ borderColor: primaryColor, color: '#1A1A1A' }}>
-                View Menu
-              </button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full relative" style={{ zIndex: 1 }}>
+        <div className="max-w-xl">
+          {badge && (
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
+              style={{ background: primaryColor, color: '#1A1A1A' }}>
+              {badge}
             </div>
+          )}
 
-            <div className="flex gap-8 mt-12 pt-8 border-t border-orange-100">
-              <div>
-                <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{locationCount}</div>
-                <div className="text-sm text-gray-500">Locations</div>
-              </div>
-              {menuItemCount && (
-                <div>
-                  <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{menuItemCount}</div>
-                  <div className="text-sm text-gray-500">Menu Items</div>
-                </div>
-              )}
-              {rating && (
-                <div>
-                  <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{rating}</div>
-                  <div className="text-sm text-gray-500">Rating</div>
-                </div>
-              )}
-            </div>
+          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6 text-white"
+            style={{ fontFamily: 'var(--font-display)' }}>
+            {heroTitle1}{' '}
+            <span style={{ color: primaryColor }}>{heroTitle2}</span>
+            <br />
+            {heroTitle3}
+          </h1>
+
+          <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-md">
+            {tagline}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button onClick={onOrderClick}
+              className="px-8 py-4 rounded-full font-semibold text-base transition-all hover:shadow-lg hover:scale-105 active:scale-95"
+              style={{ background: primaryColor, color: '#1A1A1A' }}>
+              Order Now
+            </button>
+            <button onClick={onOrderClick}
+              className="px-8 py-4 rounded-full font-semibold text-base border-2 border-white text-white transition-all hover:bg-white/10">
+              View Menu
+            </button>
           </div>
 
-          {/* Right — Food Collage */}
-          <div className="relative flex justify-center items-center">
-            <div className="relative w-72 h-72 lg:w-96 lg:h-96">
-              <div className="absolute inset-0 rounded-full"
-                style={{ background: 'linear-gradient(135deg, #FFD9BF, #FBB587)' }} />
-
-              {images[0] && (
-                <div className="absolute inset-4 rounded-full overflow-hidden shadow-2xl" style={{background: "#FBB587"}}>
-                  <Image src={images[0]} alt="food" fill className="object-cover" sizes="400px" priority placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
-                </div>
-              )}
-              {images[1] && (
-                <div className="absolute -top-2 -right-2 w-24 h-24 rounded-2xl overflow-hidden shadow-xl border-4 border-white" style={{background: "#FBB587"}}>
-                  <Image src={images[1]} alt="food" fill className="object-cover" sizes="96px" />
-                </div>
-              )}
-              {images[2] && (
-                <div className="absolute -bottom-2 -left-2 w-24 h-24 rounded-2xl overflow-hidden shadow-xl border-4 border-white" style={{background: "#FBB587"}}>
-                  <Image src={images[2]} alt="food" fill className="object-cover" sizes="96px" />
-                </div>
-              )}
-              {images[3] && (
-                <div className="absolute -bottom-4 right-8 w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-4 border-white" style={{background: "#FBB587"}}>
-                  <Image src={images[3]} alt="food" fill className="object-cover" sizes="80px" />
-                </div>
-              )}
-
-              {popularItem && (
-                <div className="absolute -top-4 left-4 bg-white rounded-2xl shadow-lg px-3 py-2 flex items-center gap-2">
-                  <span className="text-xl">🔥</span>
-                  <div>
-                    <div className="text-xs font-bold text-gray-800">Most Popular</div>
-                    <div className="text-xs text-gray-400">{popularItem}</div>
-                  </div>
-                </div>
-              )}
-
-              {rating && (
-                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-3 py-2 flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-xl">⭐</span>
-                  <div>
-                    <div className="text-xs font-bold text-gray-800">{rating} Rating</div>
-                    {reviewCount && <div className="text-xs text-gray-400">{reviewCount} reviews</div>}
-                  </div>
-                </div>
-              )}
-            </div>
+          <div className="flex flex-wrap gap-x-8 gap-y-3 mt-12 pt-8 border-t border-white/20 text-sm text-gray-200">
+            {heroInfo && <div>{heroInfo}</div>}
+            {menuItemCount && <div><span className="font-bold text-white">{menuItemCount}</span> menu items</div>}
+            {rating && <div><span className="font-bold text-white">{rating}</span> rating{reviewCount ? ` (${reviewCount} reviews)` : ''}</div>}
           </div>
         </div>
       </div>
