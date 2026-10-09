@@ -19,6 +19,7 @@ export default function CheckoutPage() {
   const [orderType, setOrderType] = useState<'pickup' | 'delivery'>('pickup')
   const [deliveryEnabled, setDeliveryEnabled] = useState(false)
   const [deliveryFee, setDeliveryFee] = useState(5.00)
+  const [zones, setZones] = useState<any[]>([])
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [couponCode, setCouponCode] = useState('')
@@ -42,6 +43,10 @@ export default function CheckoutPage() {
       const enabled = data?.value === 'true'
       setDeliveryEnabled(enabled)
       if (!enabled && savedType === 'delivery') setOrderType('pickup')
+    })
+    // ZIP codes the restaurant delivers to (managed in Admin > Delivery > Zones)
+    supabaseClient.from('delivery_zones').select('*').eq('is_active', true).eq('restaurant_id', RESTAURANT_ID).then(({ data }) => {
+      if (data) setZones(data)
     })
     supabaseClient.from('settings').select('value').eq('key', 'delivery_fee').eq('restaurant_id', RESTAURANT_ID).single().then(({ data }) => {
       if (data?.value) setDeliveryFee(parseFloat(data.value))
@@ -143,7 +148,13 @@ export default function CheckoutPage() {
     setApplyingCoupon(false)
   }
 
-  const deliveryFeeVal = orderType === 'delivery' ? deliveryFee : 0
+  // Delivery is only offered to ZIP codes on the zones list (if the list is empty, any ZIP is accepted)
+  const zip = form.postcode.trim().slice(0, 5)
+  const zone = zones.find((z: any) => (z.postcode || '').trim() === zip)
+  const zipAllowed = zones.length === 0 || !!zone
+  const zipEntered = zip.length === 5
+  const deliveryReady = orderType !== 'delivery' || (!!form.address && !!form.suburb && zipEntered && zipAllowed)
+  const deliveryFeeVal = orderType === 'delivery' ? (zone && zone.fee != null ? Number(zone.fee) : deliveryFee) : 0
   const getDiscount = () => {
     if (!coupon) return 0
     if (coupon.type === 'percent') return (getTotal() * coupon.value) / 100
@@ -302,9 +313,14 @@ export default function CheckoutPage() {
                           <label className="text-xs font-medium text-gray-500 mb-1 block">ZIP code *</label>
                           <input type="text" value={form.postcode} onChange={e => setForm({...form, postcode: e.target.value})}
                             className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400"
-                            placeholder="3021" />
+                            placeholder="33713" />
                         </div>
                       </div>
+                      {zipEntered && !zipAllowed && (
+                        <p className="text-sm font-medium" style={{ color: '#DC2626' }}>
+                          Sorry, we don&apos;t deliver to ZIP code {zip} yet. You can choose pickup instead.
+                        </p>
+                      )}
                     </div>
                   </div>
                 )}
@@ -361,7 +377,7 @@ export default function CheckoutPage() {
                   {couponError && <p className="text-xs mt-2" style={{ color: '#dc2626' }}>{couponError}</p>}
                 </div>
 
-                <button onClick={() => setStep(2)} disabled={!form.name || !form.phone || !form.email}
+                <button onClick={() => setStep(2)} disabled={!form.name || !form.phone || !form.email || !deliveryReady}
                   className="w-full py-4 rounded-full text-white font-semibold transition-all hover:shadow-lg disabled:opacity-50"
                   style={{background: 'var(--color-primary)'}}>
                   Continue to Review →
