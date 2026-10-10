@@ -200,35 +200,31 @@ export default function AccountPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       <Navbar selectedLocation={null} onLocationClick={() => {}} />
-      <div className="pt-16 max-w-2xl mx-auto px-4 py-6">
+      <div className="pt-20 pb-6 max-w-2xl mx-auto px-4">
 
-        {/* Cover + Profile */}
-        <div className="rounded-3xl overflow-hidden mb-4" style={{border:'1px solid #e5e5e5'}}>
-          {/* Cover */}
-          <div className="relative w-full h-32 overflow-hidden" style={{background:'#1a1a1a'}}>
-            {heroImage && <img src={heroImage} alt="cover" className="w-full h-full object-cover" style={{opacity:0.55}} />}
-            <div className="absolute inset-0 opacity-15" style={{backgroundImage:'repeating-linear-gradient(45deg,#F26A1B 0,#F26A1B 1px,transparent 0,transparent 50%)',backgroundSize:'16px 16px'}} />
+        {/* Profile */}
+        <div className="rounded-3xl bg-white p-5 mb-4" style={{border:'1px solid #e5e5e5'}}>
+          <div className="flex items-start justify-between mb-3">
+            <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0">
+              {avatarUrl
+                ? <img src={avatarUrl} alt={initials} className="w-full h-full object-cover" />
+                : <div className="w-full h-full flex items-center justify-center text-xl font-bold" style={{background:'#F26A1B', color: '#FFFFFF'}}>{initials}</div>
+              }
+            </div>
             <button onClick={handleLogout}
-              className="absolute top-3 right-3 flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full"
-              style={{background:'rgba(0,0,0,0.5)', color:'white'}}>
-              <LogOut size={11} /> Logout
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-full text-gray-600 hover:bg-gray-100 transition-colors"
+              style={{border:'1px solid #e5e5e5'}}>
+              <LogOut size={12} /> Logout
             </button>
           </div>
-          {/* White profile section */}
-          <div className="bg-white px-5 pb-5">
-            <div className="flex items-end justify-between -mt-6 mb-3">
-              <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0" style={{border:'3px solid white'}}>
-                {avatarUrl
-                  ? <img src={avatarUrl} alt={initials} className="w-full h-full object-cover" />
-                  : <div className="w-full h-full flex items-center justify-center text-xl font-bold" style={{background:'#F26A1B', color: '#FFFFFF'}}>{initials}</div>
-                }
-              </div>
-              <div className="text-xs px-3 py-1.5 rounded-full font-semibold" style={{background:'#FFD9BF', color:'#7A2C05', border:'1px solid #F58B4C'}}>
-                {level.icon} {level.name} Member
-              </div>
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <div className="font-bold text-gray-900 text-lg truncate">{profile.full_name || 'Welcome!'}</div>
+              <div className="text-sm text-gray-500 truncate">{user?.email}</div>
             </div>
-            <div className="font-bold text-gray-900 text-lg">{profile.full_name || 'Welcome!'}</div>
-            <div className="text-sm text-gray-400">{user?.email}</div>
+            <div className="text-xs px-3 py-1.5 rounded-full font-semibold flex-shrink-0" style={{background:'#FFD9BF', color:'#7A2C05', border:'1px solid #F58B4C'}}>
+              {level.icon} {level.name} Member
+            </div>
           </div>
         </div>
 
