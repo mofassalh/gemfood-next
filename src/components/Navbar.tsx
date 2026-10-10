@@ -60,7 +60,7 @@ export default function Navbar(_props: NavbarProps) {
           <Link href="/" className="flex items-center gap-2">
             {logoUrl
               ? <img src={logoUrl} alt={restaurantName} className="w-[52px] h-[52px] rounded-full object-cover" />
-              : <Image src="/logo.jpg" alt={restaurantName} width={52} height={52} className="rounded-full object-cover" />
+              : <Image src="/logo-mark.jpg" alt={restaurantName} width={334} height={529} className="h-14 w-auto" />
             }
             <span className="font-bold text-lg sm:text-2xl whitespace-nowrap truncate max-w-[150px] sm:max-w-none" style={{fontFamily: 'var(--font-sans)'}}>{restaurantName}</span>
           </Link>
