@@ -167,7 +167,7 @@ export default function MenuPage() {
                     )}
                     <div className="absolute top-2 left-2 flex flex-col gap-1">
                       {item.is_popular && (
-                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold" style={{background:'#F26A1B', color:'#1A1A1A'}}>⭐ Popular</span>
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold" style={{background:'#F26A1B', color: '#FFFFFF'}}>⭐ Popular</span>
                       )}
                       {item.is_special && (
                         <span className="px-2 py-0.5 rounded-full text-xs font-semibold" style={{background:'#22c55e', color:'white'}}>🎯 Special</span>

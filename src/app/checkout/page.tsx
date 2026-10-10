@@ -342,7 +342,7 @@ export default function CheckoutPage() {
                       <button onClick={() => { setCouponCode(suggestedCoupon.code); applyCoupon(suggestedCoupon.code) }}
                         disabled={applyingCoupon}
                         className="text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap disabled:opacity-50"
-                        style={{ background: '#F26A1B', color: '#1a1a1a' }}>
+                        style={{ background: '#F26A1B', color: '#FFFFFF' }}>
                         {applyingCoupon ? '...' : 'Apply'}
                       </button>
                     </div>
@@ -369,7 +369,7 @@ export default function CheckoutPage() {
                         className="flex-1 px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 uppercase" />
                       <button onClick={() => applyCoupon()} disabled={applyingCoupon || !couponCode}
                         className="px-4 py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50"
-                        style={{ background: 'var(--color-primary)', color: '#1a1a1a' }}>
+                        style={{ background: 'var(--color-primary)', color: '#FFFFFF' }}>
                         {applyingCoupon ? '...' : 'Apply'}
                       </button>
                     </div>

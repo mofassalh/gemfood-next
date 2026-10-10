@@ -183,7 +183,7 @@ function LoginContent() {
                 onClick={handleVerifyOtp}
                 disabled={loading || otp.length !== 6}
                 className="w-full py-3 rounded-full font-semibold transition-all hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{background: 'var(--color-primary)', color: '#1A1A1A'}}>
+                style={{background: 'var(--color-primary)', color: '#FFFFFF'}}>
                 {loading ? 'Verifying...' : 'Verify & Sign In'}
               </button>
 
@@ -199,12 +199,12 @@ function LoginContent() {
                 <div className="flex rounded-xl p-1 mb-6" style={{background: '#F3F4F6'}}>
                   <button onClick={() => switchMode('login')}
                     className="flex-1 py-2 rounded-lg text-sm font-semibold transition-all"
-                    style={mode === 'login' ? {background: 'var(--color-primary)', color: '#1A1A1A'} : {color: '#6B7280'}}>
+                    style={mode === 'login' ? {background: 'var(--color-primary)', color: '#FFFFFF'} : {color: '#6B7280'}}>
                     Sign In
                   </button>
                   <button onClick={() => switchMode('signup')}
                     className="flex-1 py-2 rounded-lg text-sm font-semibold transition-all"
-                    style={mode === 'signup' ? {background: 'var(--color-primary)', color: '#1A1A1A'} : {color: '#6B7280'}}>
+                    style={mode === 'signup' ? {background: 'var(--color-primary)', color: '#FFFFFF'} : {color: '#6B7280'}}>
                     Create Account
                   </button>
                 </div>
@@ -272,7 +272,7 @@ function LoginContent() {
               <button onClick={handleSubmit}
                 disabled={loading || !email || (mode !== 'forgot' && !password)}
                 className="w-full py-3 rounded-full font-semibold mt-5 transition-all hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{background: 'var(--color-primary)', color: '#1A1A1A'}}>
+                style={{background: 'var(--color-primary)', color: '#FFFFFF'}}>
                 {loading ? 'Please wait...' : mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Send Reset Link'}
               </button>
 

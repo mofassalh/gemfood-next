@@ -59,10 +59,10 @@ export default function Navbar(_props: NavbarProps) {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             {logoUrl
-              ? <img src={logoUrl} alt={restaurantName} className="w-11 h-11 rounded-full object-cover" />
-              : <Image src="/logo.jpg" alt={restaurantName} width={44} height={44} className="rounded-full object-cover" />
+              ? <img src={logoUrl} alt={restaurantName} className="w-[52px] h-[52px] rounded-full object-cover" />
+              : <Image src="/logo.jpg" alt={restaurantName} width={52} height={52} className="rounded-full object-cover" />
             }
-            <span className="font-bold text-sm sm:text-lg whitespace-nowrap truncate max-w-[140px] sm:max-w-none" style={{fontFamily: 'var(--font-sans)'}}>{restaurantName}</span>
+            <span className="font-bold text-lg sm:text-2xl whitespace-nowrap truncate max-w-[150px] sm:max-w-none" style={{fontFamily: 'var(--font-sans)'}}>{restaurantName}</span>
           </Link>
           <div className="hidden sm:flex items-center gap-8 text-sm font-semibold text-gray-700">
             <Link href="/menu" className="hover:text-orange-600 transition-colors">Menu</Link>
@@ -78,7 +78,7 @@ export default function Navbar(_props: NavbarProps) {
             </Link>
             {user ? (
               <div className="relative">
-                <button onClick={() => setDropdownOpen(!dropdownOpen)} className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm overflow-hidden" style={{background: 'var(--color-primary)', color: '#1A1A1A'}}>
+                <button onClick={() => setDropdownOpen(!dropdownOpen)} className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm overflow-hidden" style={{background: 'var(--color-primary)', color: '#FFFFFF'}}>
                   {user.user_metadata?.avatar_url ? (
                     <img src={user.user_metadata.avatar_url} className="w-9 h-9 rounded-full object-cover" alt="avatar" />
                   ) : getInitial()}
@@ -95,7 +95,7 @@ export default function Navbar(_props: NavbarProps) {
                 )}
               </div>
             ) : (
-              <Link href="/login" className="text-sm font-semibold px-4 py-2 rounded-full transition-all hover:opacity-90" style={{background: 'var(--color-primary)', color: '#1A1A1A'}}>Sign In</Link>
+              <Link href="/login" className="text-sm font-semibold px-4 py-2 rounded-full transition-all hover:opacity-90" style={{background: 'var(--color-primary)', color: '#FFFFFF'}}>Sign In</Link>
             )}
           </div>
         </div>

@@ -66,7 +66,7 @@ export default function StripePaymentForm({ onSuccess, loading, setLoading, fina
         onClick={handlePay}
         disabled={loading || !stripe}
         className="w-full py-4 rounded-full font-semibold mt-5 transition-all hover:shadow-lg hover:scale-105 disabled:opacity-50"
-        style={{ background: 'var(--color-primary)', color: '#1A1A1A' }}>
+        style={{ background: 'var(--color-primary)', color: '#FFFFFF' }}>
         {loading ? 'Processing...' : `Pay $${finalTotal.toFixed(2)}`}
       </button>
     </div>

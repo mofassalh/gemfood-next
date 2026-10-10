@@ -220,7 +220,7 @@ export default function AccountPage() {
               <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0" style={{border:'3px solid white'}}>
                 {avatarUrl
                   ? <img src={avatarUrl} alt={initials} className="w-full h-full object-cover" />
-                  : <div className="w-full h-full flex items-center justify-center text-xl font-bold" style={{background:'#F26A1B', color:'#1a1a1a'}}>{initials}</div>
+                  : <div className="w-full h-full flex items-center justify-center text-xl font-bold" style={{background:'#F26A1B', color: '#FFFFFF'}}>{initials}</div>
                 }
               </div>
               <div className="text-xs px-3 py-1.5 rounded-full font-semibold" style={{background:'#FFD9BF', color:'#7A2C05', border:'1px solid #F58B4C'}}>
@@ -355,7 +355,7 @@ export default function AccountPage() {
               <div className="bg-white rounded-3xl p-12 text-center" style={{border:'1px solid #f0f0f0'}}>
                 <div className="text-5xl mb-4">🧾</div>
                 <h3 className="text-lg font-semibold text-gray-700 mb-2">No orders yet</h3>
-                <Link href="/menu" className="px-6 py-2.5 rounded-full text-sm font-semibold inline-block mt-2" style={{background:'var(--color-primary)', color:'#1a1a1a'}}>Browse Menu</Link>
+                <Link href="/menu" className="px-6 py-2.5 rounded-full text-sm font-semibold inline-block mt-2" style={{background:'var(--color-primary)', color: '#FFFFFF'}}>Browse Menu</Link>
               </div>
             ) : (
               <div className="space-y-3">
@@ -401,7 +401,7 @@ export default function AccountPage() {
                           <div className="flex gap-2">
                             <button onClick={() => handleReorder(order)}
                               className="flex-1 py-2 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 transition-all hover:scale-105"
-                              style={{background:'var(--color-primary)', color:'#1a1a1a'}}>
+                              style={{background:'var(--color-primary)', color: '#FFFFFF'}}>
                               <RefreshCw size={13} /> Reorder
                             </button>
                             {order.status === 'delivered' && (
@@ -453,7 +453,7 @@ export default function AccountPage() {
                 style={{border:'1px solid #e5e5e5', color:'#555'}}>Cancel</button>
               <button onClick={async () => { await handleSave(); setEditModal(false) }} disabled={saving}
                 className="flex-1 py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
-                style={{background:'var(--color-primary)', color:'#1a1a1a'}}>
+                style={{background:'var(--color-primary)', color: '#FFFFFF'}}>
                 <Save size={14} />
                 {saving ? 'Saving...' : saved ? 'Saved!' : 'Save'}
               </button>
@@ -485,7 +485,7 @@ export default function AccountPage() {
                 style={{border:'1px solid #e5e5e5', color:'#555'}}>Cancel</button>
               <button onClick={submitRating} disabled={!starSelected || submitting}
                 className="flex-1 py-3 rounded-xl text-sm font-semibold"
-                style={{background: starSelected ? '#F26A1B' : '#f5f5f5', color: starSelected ? '#1a1a1a' : '#aaa'}}>
+                style={{background: starSelected ? '#F26A1B' : '#f5f5f5', color: starSelected ? '#FFFFFF' : '#aaa'}}>
                 {submitting ? 'Saving...' : 'Submit'}
               </button>
             </div>

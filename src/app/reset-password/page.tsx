@@ -104,7 +104,7 @@ function ResetPasswordContent() {
               </div>
               <button onClick={handleReset} disabled={loading || !password || !confirm}
                 className="w-full py-3 rounded-full font-semibold mt-5 transition-all hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{background: 'var(--color-primary)', color: '#1A1A1A'}}>
+                style={{background: 'var(--color-primary)', color: '#FFFFFF'}}>
                 {loading ? 'Updating...' : 'Update Password'}
               </button>
             </>

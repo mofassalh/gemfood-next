@@ -112,7 +112,7 @@ export default function AboutPage() {
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4" style={{fontFamily: 'var(--font-display)'}}>
           Ready to taste the difference?
         </h2>
-        <Link href="/menu" className="inline-block mt-2 px-8 py-3 rounded-full font-semibold transition-all hover:shadow-lg hover:scale-105" style={{background: '#F26A1B', color: '#1A1A1A'}}>
+        <Link href="/menu" className="inline-block mt-2 px-8 py-3 rounded-full font-semibold transition-all hover:shadow-lg hover:scale-105" style={{background: '#F26A1B', color: '#FFFFFF'}}>
           Order Now
         </Link>
       </section>

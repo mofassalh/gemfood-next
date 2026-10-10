@@ -35,7 +35,7 @@ export default function CookieBanner() {
             Decline
           </button>
           <button onClick={accept}
-            className="px-6 py-2 rounded-full text-sm font-semibold text-gray-900 transition-all hover:opacity-90"
+            className="px-6 py-2 rounded-full text-sm font-semibold text-white transition-all hover:opacity-90"
             style={{background:'#F26A1B'}}>
             Accept All
           </button>

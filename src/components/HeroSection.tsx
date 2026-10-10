@@ -97,7 +97,7 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
         <div className="max-w-xl">
           {badge && (
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
-              style={{ background: primaryColor, color: '#1A1A1A' }}>
+              style={{ background: primaryColor, color: '#FFFFFF' }}>
               {badge}
             </div>
           )}
@@ -116,7 +116,7 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
           <div className="flex flex-col sm:flex-row gap-4">
             <button onClick={onOrderClick}
               className="px-8 py-4 rounded-full font-semibold text-base transition-all hover:shadow-lg hover:scale-105 active:scale-95"
-              style={{ background: primaryColor, color: '#1A1A1A' }}>
+              style={{ background: primaryColor, color: '#FFFFFF' }}>
               Order Now
             </button>
             <button onClick={onOrderClick}
