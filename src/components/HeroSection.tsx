@@ -94,7 +94,7 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
         style={{ background: 'linear-gradient(90deg, #1A1A1A 0%, #1A1A1A 40%, rgba(26,26,26,0.6) 58%, rgba(26,26,26,0) 82%)' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 w-full relative" style={{ zIndex: 1 }}>
-        <div className="max-w-xl">
+        <div className="max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
           {badge && (
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
               style={{ background: primaryColor, color: '#FFFFFF' }}>
@@ -109,11 +109,11 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
             {heroTitle3}
           </h1>
 
-          <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-md">
+          <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-md mx-auto lg:mx-0">
             {tagline}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <button onClick={onOrderClick}
               className="px-8 py-4 rounded-full font-semibold text-base transition-all hover:shadow-lg hover:scale-105 active:scale-95"
               style={{ background: primaryColor, color: '#FFFFFF' }}>
@@ -125,7 +125,7 @@ export default function HeroSection({ onOrderClick }: HeroProps) {
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-x-8 gap-y-3 mt-12 pt-8 border-t border-white/20 text-sm text-gray-200">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-3 mt-12 pt-8 border-t border-white/20 text-sm text-gray-200">
             {heroInfo && <div>{heroInfo}</div>}
             {menuItemCount && <div><span className="font-bold text-white">{menuItemCount}</span> menu items</div>}
             {rating && <div><span className="font-bold text-white">{rating}</span> rating{reviewCount ? ` (${reviewCount} reviews)` : ''}</div>}
